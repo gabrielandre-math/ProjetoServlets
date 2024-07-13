@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
@@ -16,14 +14,17 @@ public class Livros {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String isbn;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String nome;
 
     private int quantidade;
 
-    @OneToMany(mappedBy = "categorias", fetch = FetchType.EAGER)
-    private List<Categorias> categorias;
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categorias categoria;
+
+
 }

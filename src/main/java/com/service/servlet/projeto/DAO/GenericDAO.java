@@ -7,83 +7,102 @@ import jakarta.persistence.PersistenceException;
 
 import java.util.List;
 
-public class GenericDAO<T> {
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit");
-    EntityManager em = emf.createEntityManager();
+public abstract class GenericDAO<T> {
+    private EntityManagerFactory emf;
 
-    public void save(T object){
-        try{
+    protected GenericDAO() {
+        this.emf = Persistence.createEntityManagerFactory("my-persistence-unit");
+    }
+
+    protected GenericDAO(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+
+    protected EntityManager getEntityManager() {
+        return emf.createEntityManager();
+    }
+
+    protected void save(T object) {
+        EntityManager em = getEntityManager();
+        try {
             em.getTransaction().begin();
             em.persist(object);
             em.getTransaction().commit();
-        }catch(Exception e){
-            if(em.getTransaction().isActive()){
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             e.printStackTrace();
             throw new PersistenceException("Erro ao salvar", e);
+        } finally {
+            em.close();
         }
     }
 
-    public void update(T object){
-        try{
+    protected void update(T object) {
+        EntityManager em = getEntityManager();
+        try {
             em.getTransaction().begin();
             em.merge(object);
             em.getTransaction().commit();
-        }catch(Exception e){
-            if(em.getTransaction().isActive()){
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             e.printStackTrace();
             throw new PersistenceException("Erro ao atualizar", e);
+        } finally {
+            em.close();
         }
     }
 
-    public void delete(T object){
-        try{
+    protected void delete(T object) {
+        EntityManager em = getEntityManager();
+        try {
             em.getTransaction().begin();
             if (!em.contains(object)) {
                 object = em.merge(object);
             }
             em.remove(object);
             em.getTransaction().commit();
-        }catch(Exception e){
-            if(em.getTransaction().isActive()){
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             e.printStackTrace();
             throw new PersistenceException("Erro ao excluir", e);
+        } finally {
+            em.close();
         }
     }
 
-    public T findById(Class<T> entityClass, Long id) {
+    protected T findById(Class<T> entityClass, Long id) {
+        EntityManager em = getEntityManager();
         try {
-            em.getTransaction().begin();
-            T entity = em.find(entityClass, id);
-            em.getTransaction().commit();
-            return entity;
+            return em.find(entityClass, id);
         } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
             e.printStackTrace();
             throw new PersistenceException("Erro ao buscar entidade pelo ID", e);
+        } finally {
+            em.close();
         }
     }
 
-    public List<T> findAll(Class<T> entityClass) {
+    protected List<T> findAll(Class<T> entityClass) {
+        EntityManager em = getEntityManager();
         try {
-            em.getTransaction().begin();
-            List<T> resultList = em.createQuery("from " + entityClass.getSimpleName(), entityClass).getResultList();
-            em.getTransaction().commit();
-            return resultList;
+            return em.createQuery("from " + entityClass.getSimpleName(), entityClass).getResultList();
         } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
             e.printStackTrace();
             throw new PersistenceException("Erro ao buscar todas as entidades", e);
+        } finally {
+            em.close();
         }
     }
 
+    public void close() {
+        if (emf.isOpen()) {
+            emf.close();
+        }
+    }
 }
