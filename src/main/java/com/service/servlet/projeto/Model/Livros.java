@@ -1,14 +1,14 @@
 package com.service.servlet.projeto.Model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Livros {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +26,10 @@ public class Livros {
     @JoinColumn(name = "categoria_id")
     private Categorias categoria;
 
-
+    public Livros(String isbn, String nome, Categorias categoria ,int quantidade) {
+        this.isbn = isbn;
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.categoria = categoria;
+    }
 }

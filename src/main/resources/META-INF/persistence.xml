@@ -3,11 +3,12 @@
     <persistence-unit name="my-persistence-unit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>com.service.servlet.projeto.Model.Livros</class> <!-- Substitua pelo caminho da sua entidade -->
-        <class>com.service.servlet.projeto.Model.Livros</class>
+        <class>com.service.servlet.projeto.Model.Categorias</class>
+        <class>com.service.servlet.projeto.Model.Usuarios</class>
         <properties>
             <!-- JDBC Database Connection Settings -->
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/biblioteca"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>
             <property name="javax.persistence.jdbc.password" value="postgres"/>
 
