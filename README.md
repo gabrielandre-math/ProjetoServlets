@@ -6,7 +6,7 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/gabrielandre-math/ProjetoServlets?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/gabrielandre-math/ProjetoServlets?style=for-the-badge)
 
-<img src="imagem.png" alt="Exemplo imagem">
+> <img src="imagem.png" alt="Exemplo imagem">
 
 > Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
 
