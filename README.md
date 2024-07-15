@@ -74,7 +74,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
   <tr>
     <td align="center">
       <a href="#" title="contribuidor">
-        <img src="" width="100px;" alt="Foto do Gabriel no GitHub"/><br>
+        <img src="https://avatars.githubusercontent.com/u/60861872?s=400&u=49b2e6b1034e45f02529c6e165c41de8300ed350&v=4" width="100px;" alt="Foto do Gabriel"/><br>
         <sub>
           <b>Gabriel André</b>
         </sub>
