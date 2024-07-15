@@ -10,19 +10,19 @@ import java.util.List;
 public abstract class GenericDAO<T> {
     private EntityManagerFactory emf;
 
-    protected GenericDAO() {
+    public GenericDAO() {
         this.emf = Persistence.createEntityManagerFactory("my-persistence-unit");
     }
 
-    protected GenericDAO(EntityManagerFactory emf) {
+    public GenericDAO(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
-    protected EntityManager getEntityManager() {
+    public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    protected void save(T object) {
+    public void save(T object) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
@@ -39,7 +39,7 @@ public abstract class GenericDAO<T> {
         }
     }
 
-    protected void update(T object) {
+    public void update(T object) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
@@ -56,7 +56,7 @@ public abstract class GenericDAO<T> {
         }
     }
 
-    protected void delete(T object) {
+    public void delete(T object) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
@@ -76,7 +76,7 @@ public abstract class GenericDAO<T> {
         }
     }
 
-    protected T findById(Class<T> entityClass, Long id) {
+    public T findById(Class<T> entityClass, Long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(entityClass, id);
@@ -88,7 +88,7 @@ public abstract class GenericDAO<T> {
         }
     }
 
-    protected List<T> findAll(Class<T> entityClass) {
+    public List<T> findAll(Class<T> entityClass) {
         EntityManager em = getEntityManager();
         try {
             return em.createQuery("from " + entityClass.getSimpleName(), entityClass).getResultList();

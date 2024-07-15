@@ -24,4 +24,14 @@ public class Categorias {
 
     @OneToMany(mappedBy = "categorias", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Livros> livros = new HashSet<>();
+
+    public void addLivro(Livros livro) {
+        livros.add(livro);
+        livro.setCategoria(this);
+    }
+
+    public void removeLivro(Livros livro) {
+        livros.remove(livro);
+        livro.setCategoria(null);
+    }
 }

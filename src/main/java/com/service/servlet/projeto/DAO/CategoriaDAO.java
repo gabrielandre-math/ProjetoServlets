@@ -3,12 +3,12 @@ package com.service.servlet.projeto.DAO;
 import com.service.servlet.projeto.Model.Categorias;
 import jakarta.persistence.EntityManagerFactory;
 
-public class CategoriaDAOImpl extends GenericDAO<Categorias> {
-    public CategoriaDAOImpl() {
+public class CategoriaDAO extends GenericDAO<Categorias> {
+    public CategoriaDAO() {
         super();
     }
 
-    public CategoriaDAOImpl(EntityManagerFactory emf) {
+    public CategoriaDAO(EntityManagerFactory emf) {
         super(emf);
     }
 }
