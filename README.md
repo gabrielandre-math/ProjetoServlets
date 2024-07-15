@@ -90,7 +90,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
     </td>
     <td align="center">
       <a href="#" title="contribuidor">
-        <img src="https://miro.medium.com/max/360/0*1SkS3mSorArvY9kS.jpg" width="100px;" alt="Foto da Janete"/><br>
+        <img src="https://avatars.githubusercontent.com/u/115745238?v=4" width="100px;" alt="Foto da Janete"/><br>
         <sub>
           <b>Janete</b>
         </sub>
