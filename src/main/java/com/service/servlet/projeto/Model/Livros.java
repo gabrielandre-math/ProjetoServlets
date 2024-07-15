@@ -1,35 +1,79 @@
 package com.service.servlet.projeto.Model;
 
-import jakarta.persistence.*;
-import lombok.*;
-
-@Entity
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
 public class Livros {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, unique = true)
     private String isbn;
-
-    @Column(nullable = false, unique = true)
     private String nome;
-
     private int quantidade;
-
-    @ManyToOne
-    @JoinColumn(name = "categoria_id")
     private Categorias categoria;
 
-    public Livros(String isbn, String nome, Categorias categoria ,int quantidade) {
+    public Livros() {
+    }
+
+    public Livros(String isbn, String nome, Categorias categoria, int quantidade) {
         this.isbn = isbn;
         this.nome = nome;
         this.quantidade = quantidade;
+        this.categoria = categoria;
+    }
+
+    public Livros(Long id, String isbn, String nome, int quantidade, Categorias categoria) {
+        this.id = id;
+        this.isbn = isbn;
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.categoria = categoria;
+    }
+
+    public Livros(Long id) {
+        this.id = id;
+    }
+
+    public Livros(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public Livros(Categorias categoria) {
+        this.categoria = categoria;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public Categorias getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categorias categoria) {
         this.categoria = categoria;
     }
 }

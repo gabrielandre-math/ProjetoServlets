@@ -1,37 +1,45 @@
 package com.service.servlet.projeto.Model;
 
-
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-import java.util.HashSet;
-import java.util.Set;
-
-@Entity
-@Getter
-@Setter
-@ToString
 public class Categorias {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, unique = true)
     private String nome;
 
-
-    @OneToMany(mappedBy = "categorias", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Livros> livros = new HashSet<>();
-
-    public void addLivro(Livros livro) {
-        livros.add(livro);
-        livro.setCategoria(this);
+    public Categorias() {
     }
 
-    public void removeLivro(Livros livro) {
-        livros.remove(livro);
-        livro.setCategoria(null);
+    public Categorias(String nome) {
+        this.nome = nome;
+    }
+
+    public Categorias(Long id) {
+        this.id = id;
+    }
+
+    public Categorias(Long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return "Categoria: " +
+                "\nID: " + id +
+                " | Nome: " + nome;
     }
 }

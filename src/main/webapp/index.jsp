@@ -1,17 +1,13 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Biblioteca Servlet</title>
 </head>
 <body>
-<h1><%= "Seja bem-vindo a Biblioteca Servlet!" %>
-</h1>
-<br/>
-<a href="login.jsp">Login</a>
-<br/>
-<a href="register.jsp">Register</a>
-<br/>
-<a href="admin/loadBooks.jsp">Carregar livros</a>
+<h1>Bem-vindo à Biblioteca</h1>
+<a href="login.jsp">Entrar</a> |
+<a href="register.jsp">Registrar</a>|
 </body>
 </html>

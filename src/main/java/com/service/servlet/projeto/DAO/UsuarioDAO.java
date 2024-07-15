@@ -1,125 +1,92 @@
 package com.service.servlet.projeto.DAO;
 
 import com.service.servlet.projeto.Model.Usuarios;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
-import java.io.IOException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDAO extends GenericDAO<Usuarios> {
-    public UsuarioDAO() {
-        super();
-    }
 
-    public void registrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        EntityManager em = getEntityManager();
-        try {
-            em.getTransaction().begin();
-
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            String name = request.getParameter("name");
-
-            Usuarios newUser = new Usuarios(name, email, password);
-
-            // Fetch all users to check for existing email
-            List<Usuarios> existingUsers = findAll(Usuarios.class);
-
-            // Authenticate against existing users
-            Usuarios existingUser = autenticar(newUser, existingUsers);
-            if (existingUser != null) {
-                request.setAttribute("error", "Usuário já existe com este email.");
-                request.getRequestDispatcher("register.jsp").forward(request, response);
-                return;
-            }
-
-            em.persist(newUser);
-            em.getTransaction().commit();
-
-            request.getSession().setAttribute("user", newUser);
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-        } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
+    @Override
+    public void save(Usuarios usuario) {
+        String sql = "INSERT INTO usuarios (nome, email, senha, isAdmin) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getEmail());
+            stmt.setString(3, usuario.getPassword());
+            stmt.setBoolean(4, usuario.isAdmin());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
-            request.setAttribute("error", "Erro ao registrar usuário.");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-        } finally {
-            em.close();
         }
     }
 
-    public boolean logar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        EntityManager em = getEntityManager();
-        try {
-            em.getTransaction().begin();
-
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-
-            Usuarios loginAttempt = new Usuarios(null, email, password);
-
-            // Fetch all users to authenticate against
-            List<Usuarios> users = findAll(Usuarios.class);
-
-            // Authenticate the login attempt
-            Usuarios authUser = autenticar(loginAttempt, users);
-            if (authUser != null) {
-                request.getSession().setAttribute("user", authUser);
-                request.getRequestDispatcher("home_adm.jsp").forward(request, response);
-                return true;
-            } else {
-                request.getSession().setAttribute("error", "Credenciais inválidas.");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-                return false;
+    @Override
+    public List<Usuarios> findAll() {
+        List<Usuarios> usuarios = new ArrayList<>();
+        String sql = "SELECT * FROM usuarios";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                Usuarios usuario = new Usuarios();
+                usuario.setId(rs.getLong("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setPassword(rs.getString("senha"));
+                usuario.setAdmin(rs.getBoolean("isAdmin"));
+                usuarios.add(usuario);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            request.setAttribute("error", "Erro ao fazer login.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            return false;
-        } finally {
-            em.close();
+        }
+        return usuarios;
+    }
+
+    @Override
+    public Usuarios findById(Long id) {
+        Usuarios usuario = null;
+        String sql = "SELECT * FROM usuarios WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                usuario = new Usuarios();
+                usuario.setId(rs.getLong("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setPassword(rs.getString("senha"));
+                usuario.setAdmin(rs.getBoolean("isAdmin"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuario;
+    }
+
+    @Override
+    public void update(Usuarios usuario) {
+        String sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, isAdmin = ? WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getEmail());
+            stmt.setString(3, usuario.getPassword());
+            stmt.setBoolean(4, usuario.isAdmin());
+            stmt.setLong(5, usuario.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    public Usuarios autenticar(Usuarios user, List<Usuarios> userList) {
-        if (userList.contains(user)) {
-            return userList.get(userList.indexOf(user));
-        }
-        return null;
-    }
-
-    public Usuarios findByEmailAndPassword(String email, String password) {
-        EntityManager em = getEntityManager();
-        try {
-            return em.createQuery("SELECT u FROM Usuarios u WHERE u.email = :email AND u.senha = :password", Usuarios.class)
-                    .setParameter("email", email)
-                    .setParameter("password", password)
-                    .getSingleResult();
-        } catch (NoResultException e) {
-            return null; // Usuário não encontrado com o email e senha fornecidos
-        } finally {
-            em.close();
-        }
-    }
-
-    public Usuarios findAdmin(String email, String password) {
-        EntityManager em = getEntityManager();
-        try {
-            return em.createQuery("SELECT u FROM Usuarios u WHERE u.email = :email AND u.senha = :password AND u.isAdmin = true", Usuarios.class)
-                    .setParameter("email", email)
-                    .setParameter("password", password)
-                    .getSingleResult();
-        } catch (NoResultException e) {
-            return null; // Usuário administrador não encontrado com o email e senha fornecidos
-        } finally {
-            em.close();
+    @Override
+    public void delete(Long id) {
+        String sql = "DELETE FROM usuarios WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
