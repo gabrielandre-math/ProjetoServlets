@@ -1,108 +1,35 @@
 package com.service.servlet.projeto.DAO;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.PersistenceException;
+import com.service.servlet.projeto.DB.DBConnection;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 public abstract class GenericDAO<T> {
-    private EntityManagerFactory emf;
+    protected Connection connection;
 
     public GenericDAO() {
-        this.emf = Persistence.createEntityManagerFactory("my-persistence-unit");
+        this.connection = DBConnection.getConnection();
     }
 
-    public GenericDAO(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
+    public abstract void save(T entity);
 
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
+    public abstract List<T> findAll();
 
-    public void save(T object) {
-        EntityManager em = getEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.persist(object);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            e.printStackTrace();
-            throw new PersistenceException("Erro ao salvar", e);
-        } finally {
-            em.close();
-        }
-    }
+    public abstract T findById(Long id);
 
-    public void update(T object) {
-        EntityManager em = getEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.merge(object);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            e.printStackTrace();
-            throw new PersistenceException("Erro ao atualizar", e);
-        } finally {
-            em.close();
-        }
-    }
+    public abstract void update(T entity);
 
-    public void delete(T object) {
-        EntityManager em = getEntityManager();
-        try {
-            em.getTransaction().begin();
-            if (!em.contains(object)) {
-                object = em.merge(object);
-            }
-            em.remove(object);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            e.printStackTrace();
-            throw new PersistenceException("Erro ao excluir", e);
-        } finally {
-            em.close();
-        }
-    }
-
-    public T findById(Class<T> entityClass, Long id) {
-        EntityManager em = getEntityManager();
-        try {
-            return em.find(entityClass, id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new PersistenceException("Erro ao buscar entidade pelo ID", e);
-        } finally {
-            em.close();
-        }
-    }
-
-    public List<T> findAll(Class<T> entityClass) {
-        EntityManager em = getEntityManager();
-        try {
-            return em.createQuery("from " + entityClass.getSimpleName(), entityClass).getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new PersistenceException("Erro ao buscar todas as entidades", e);
-        } finally {
-            em.close();
-        }
-    }
+    public abstract void delete(Long id);
 
     public void close() {
-        if (emf.isOpen()) {
-            emf.close();
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
