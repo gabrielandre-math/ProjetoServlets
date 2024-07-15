@@ -6,7 +6,7 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/gabrielandre-math/ProjetoServlets?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/gabrielandre-math/ProjetoServlets?style=for-the-badge)
 
-<img src="imagem.png" alt="Exemplo imagem">
+> <img src="imagem.png" alt="Exemplo imagem">
 
 > Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
 
@@ -90,7 +90,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
     </td>
     <td align="center">
       <a href="#" title="contribuidor">
-        <img src="https://miro.medium.com/max/360/0*1SkS3mSorArvY9kS.jpg" width="100px;" alt="Foto da Janete"/><br>
+        <img src="https://avatars.githubusercontent.com/u/115745238?v=4" width="100px;" alt="Foto da Janete"/><br>
         <sub>
           <b>Janete</b>
         </sub>
