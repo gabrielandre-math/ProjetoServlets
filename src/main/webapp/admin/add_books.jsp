@@ -49,5 +49,8 @@
                 </div>
             </div>
         </div>
+    <div style="margin-top: 40px;">
+        <%@include file="footer.jsp"%>
+    </div>
 </body>
 </html>
