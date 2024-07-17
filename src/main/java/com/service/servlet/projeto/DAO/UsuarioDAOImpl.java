@@ -6,20 +6,29 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDAO extends GenericDAO<Usuarios> {
+public class UsuarioDAOImpl extends GenericDAO<Usuarios> {
+
+    public UsuarioDAOImpl() {
+        super();
+    }
 
     @Override
-    public void save(Usuarios usuario) {
-        String sql = "INSERT INTO usuarios (nome, email, senha, isAdmin) VALUES (?, ?, ?, ?)";
+    public boolean save(Usuarios usuario) {
+        boolean retorno = false;
+        String sql = "INSERT INTO usuarios (nome, email, senha,isadmin) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());
-            stmt.setString(3, usuario.getPassword());
+            stmt.setString(3, usuario.getSenha());
             stmt.setBoolean(4, usuario.isAdmin());
-            stmt.executeUpdate();
+            int i = stmt.executeUpdate();
+            if(i == 1){
+                retorno = true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return retorno;
     }
 
     @Override
@@ -33,7 +42,7 @@ public class UsuarioDAO extends GenericDAO<Usuarios> {
                 usuario.setId(rs.getLong("id"));
                 usuario.setNome(rs.getString("nome"));
                 usuario.setEmail(rs.getString("email"));
-                usuario.setPassword(rs.getString("senha"));
+                usuario.setSenha(rs.getString("senha"));
                 usuario.setAdmin(rs.getBoolean("isAdmin"));
                 usuarios.add(usuario);
             }
@@ -55,7 +64,7 @@ public class UsuarioDAO extends GenericDAO<Usuarios> {
                 usuario.setId(rs.getLong("id"));
                 usuario.setNome(rs.getString("nome"));
                 usuario.setEmail(rs.getString("email"));
-                usuario.setPassword(rs.getString("senha"));
+                usuario.setSenha(rs.getString("senha"));
                 usuario.setAdmin(rs.getBoolean("isAdmin"));
             }
         } catch (SQLException e) {
@@ -64,13 +73,55 @@ public class UsuarioDAO extends GenericDAO<Usuarios> {
         return usuario;
     }
 
+    public Usuarios findByEmail(String email) {
+        Usuarios usuario = null;
+        String sql = "SELECT * FROM usuarios WHERE email = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                usuario = new Usuarios();
+                usuario.setId(rs.getLong("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setAdmin(rs.getBoolean("isAdmin"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuario;
+    }
+
+    public Usuarios findByEmailAndPassowrd(String email, String password) {
+        Usuarios usuario = null;
+        String sql = "SELECT * FROM usuarios WHERE email = ? and password = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                usuario = new Usuarios();
+                usuario.setId(rs.getLong("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setAdmin(rs.getBoolean("isAdmin"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuario;
+    }
+
+
     @Override
     public void update(Usuarios usuario) {
         String sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, isAdmin = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());
-            stmt.setString(3, usuario.getPassword());
+            stmt.setString(3, usuario.getSenha());
             stmt.setBoolean(4, usuario.isAdmin());
             stmt.setLong(5, usuario.getId());
             stmt.executeUpdate();

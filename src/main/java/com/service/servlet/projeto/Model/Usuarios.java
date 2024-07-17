@@ -6,7 +6,7 @@ public class Usuarios {
     private Long id;
     private String nome;
     private String email;
-    private String password;
+    private String senha;
     private boolean isAdmin;
 
     public Usuarios() {
@@ -16,28 +16,28 @@ public class Usuarios {
         this.id = id;
     }
 
-    public Usuarios(String nome, String email, String password, boolean isAdmin) {
+    public Usuarios(String nome, String email, String senha, boolean isAdmin) {
         this.nome = nome;
         this.email = email;
-        this.password = password;
+        this.senha = senha;
         this.isAdmin = isAdmin;
     }
 
-    public Usuarios(String nome, String email, String password) {
+    public Usuarios(String nome, String email, String senha) {
         this.nome = nome;
         this.email = email;
-        this.password = password;
+        this.senha = senha;
     }
 
-    public Usuarios(Long id, String nome, String email, String password) {
+    public Usuarios(Long id, String nome, String email, String senha) {
         this.id = id;
         this.nome = nome;
         this.email = email;
-        this.password = password;
+        this.senha = senha;
     }
 
-    public Usuarios(String password, String email) {
-        this.password = password;
+    public Usuarios(String senha, String email) {
+        this.senha = senha;
         this.email = email;
     }
 
@@ -65,12 +65,12 @@ public class Usuarios {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public boolean isAdmin() {
@@ -83,9 +83,12 @@ public class Usuarios {
 
     @Override
     public String toString() {
-        return "Usuário{" +
-                "name='" + nome + '\'' +
+        return "Usuarios{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + senha + '\'' +
+                ", isAdmin=" + isAdmin +
                 '}';
     }
 
@@ -94,11 +97,11 @@ public class Usuarios {
         if (this == o) return true;
         if (!(o instanceof Usuarios)) return false;
         Usuarios user = (Usuarios) o;
-        return Objects.equals(password, user.password) && Objects.equals(email, user.email);
+        return Objects.equals(senha, user.senha) && Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(password, email);
+        return Objects.hash(senha, email);
     }
 }

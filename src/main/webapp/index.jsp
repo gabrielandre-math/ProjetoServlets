@@ -1,3 +1,5 @@
+<%@ page import="com.service.servlet.projeto.DB.DBConnection" %>
+<%@ page import="java.sql.Connection" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -57,6 +59,7 @@
         transform: translateX(-300px); /* Definir a posição inicial fora da viewport */
     }
 </style>
+
 <div class="container-fluid back-img">
     <h2>Sistema de Gerenciamento de Livros</h2>
 </div>

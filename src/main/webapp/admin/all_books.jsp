@@ -21,7 +21,7 @@
         <th scope="col">Nome</th>
         <th scope="col">Categoria</th>
         <th scope="col">Quantidade</th>
-        <th scope="col">Ação</th>
+        <th scope="col">Atualizar</th>
     </tr>
     </thead>
     <tbody>

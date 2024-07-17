@@ -76,4 +76,15 @@ public class Livros {
     public void setCategoria(Categorias categoria) {
         this.categoria = categoria;
     }
+
+    @Override
+    public String toString() {
+        return "Livros{" +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
+                ", nome='" + nome + '\'' +
+                ", quantidade=" + quantidade +
+                ", categoria=" + categoria +
+                '}';
+    }
 }

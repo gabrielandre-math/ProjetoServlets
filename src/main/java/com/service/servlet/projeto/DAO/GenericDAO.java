@@ -13,7 +13,7 @@ public abstract class GenericDAO<T> {
         this.connection = DBConnection.getConnection();
     }
 
-    public abstract void save(T entity);
+    public abstract boolean save(T entity);
 
     public abstract List<T> findAll();
 
