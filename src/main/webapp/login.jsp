@@ -1,3 +1,7 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ page isELIgnored="false" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,14 +30,20 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="text-center mb-4">Login</h3>
-                    <form>
+
+                    <c:if test="${not empty loginFail}">
+                        <h5 class="text-center text-danger">${loginFail}</h5>
+                        <c:remove var="loginFail" scope="session"/>
+                    </c:if>
+
+                    <form action="login" method="post">
                         <div class="form-group mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="required" name="email">
                         </div>
                         <div class="form-group mb-4">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" required>
+                            <input type="password" class="form-control" id="exampleInputPassword1" required="required" name="password">
                         </div>
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn bg-custom text-white">Login</button>

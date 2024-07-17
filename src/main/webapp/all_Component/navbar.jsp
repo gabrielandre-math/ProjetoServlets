@@ -76,7 +76,7 @@
 <!-- Navbar 1 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light diagonal-1" id="navbar1">
     <div class="container-fluid">
-        <a class="navbar-brand font-style ms-2" id="main-logo" href="#">
+        <a class="navbar-brand font-style ms-2" id="main-logo" href="index.jsp">
             ServletBook <i class="bi bi-layers-fill"></i>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

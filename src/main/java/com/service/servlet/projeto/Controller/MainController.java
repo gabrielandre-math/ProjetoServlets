@@ -4,9 +4,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.service.servlet.projeto.DAO.CategoriaDAO;
-import com.service.servlet.projeto.DAO.LivroDAO;
-import com.service.servlet.projeto.DAO.UsuarioDAO;
+import com.service.servlet.projeto.DAO.CategoriaDAOImpl;
+import com.service.servlet.projeto.DAO.LivroDAOImpl;
+import com.service.servlet.projeto.DAO.UsuarioDAOImpl;
 import com.service.servlet.projeto.Model.Categorias;
 import com.service.servlet.projeto.Model.Livros;
 import com.service.servlet.projeto.Model.Usuarios;
@@ -17,9 +17,9 @@ import jakarta.servlet.annotation.*;
 
 @WebServlet("/index")
 public class MainController extends HttpServlet {
-    private LivroDAO livroDAO;
-    private CategoriaDAO categoriaDAO;
-    private UsuarioDAO usuarioDAO;
+    private LivroDAOImpl livroDAOImpl;
+    private CategoriaDAOImpl categoriaDAOImpl;
+    private UsuarioDAOImpl usuarioDAOImpl;
     Usuarios user;
     List<Usuarios> users = new ArrayList<>();
     UserAuthenticate authenticator;
@@ -27,9 +27,9 @@ public class MainController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        livroDAO = new LivroDAO();
-        categoriaDAO = new CategoriaDAO();
-        usuarioDAO = new UsuarioDAO();
+        livroDAOImpl = new LivroDAOImpl();
+        categoriaDAOImpl = new CategoriaDAOImpl();
+        usuarioDAOImpl = new UsuarioDAOImpl();
     }
 
     @Override
@@ -76,18 +76,18 @@ public class MainController extends HttpServlet {
     }
 
     private void listarLivros(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("listaLivros", livroDAO.findAll());
-        request.setAttribute("listaCategorias", categoriaDAO.findAll());
+        request.setAttribute("listaLivros", livroDAOImpl.findAll());
+        request.setAttribute("listaCategorias", categoriaDAOImpl.findAll());
         request.getRequestDispatcher("livros.jsp").forward(request, response);
     }
 
     private void listarCategorias(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("listaCategorias", categoriaDAO.findAll());
+        request.setAttribute("listaCategorias", categoriaDAOImpl.findAll());
         request.getRequestDispatcher("categorias.jsp").forward(request, response);
     }
 
     private void listarUsuarios(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("listaUsuarios", usuarioDAO.findAll());
+        request.setAttribute("listaUsuarios", usuarioDAOImpl.findAll());
         request.getRequestDispatcher("usuarios.jsp").forward(request, response);
     }
 
@@ -97,10 +97,10 @@ public class MainController extends HttpServlet {
         int quantidade = Integer.parseInt(request.getParameter("quantidade"));
         Long categoriaId = Long.parseLong(request.getParameter("categoria"));
 
-        Categorias categoria = categoriaDAO.findById(categoriaId);
+        Categorias categoria = categoriaDAOImpl.findById(categoriaId);
         Livros livro = new Livros(isbn, nome, categoria, quantidade);
 
-        livroDAO.save(livro);
+        livroDAOImpl.save(livro);
         response.sendRedirect("livros");
     }
 
@@ -108,7 +108,7 @@ public class MainController extends HttpServlet {
         String nome = request.getParameter("nome");
 
         Categorias categoria = new Categorias(nome);
-        categoriaDAO.save(categoria);
+        categoriaDAOImpl.save(categoria);
         response.sendRedirect("categorias");
     }
 
@@ -118,7 +118,7 @@ public class MainController extends HttpServlet {
         String senha = request.getParameter("senha");
 
         Usuarios usuario = new Usuarios(nome, email, senha);
-        usuarioDAO.save(usuario);
+        usuarioDAOImpl.save(usuario);
         response.sendRedirect("usuarios");
     }
 

@@ -6,10 +6,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriaDAO extends GenericDAO<Categorias> {
+public class CategoriaDAOImpl extends GenericDAO<Categorias> {
 
     @Override
-    public void save(Categorias categoria) {
+    public boolean save(Categorias categoria) {
         String sql = "INSERT INTO categorias (nome) VALUES (?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, categoria.getNome());
@@ -17,6 +17,7 @@ public class CategoriaDAO extends GenericDAO<Categorias> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     @Override

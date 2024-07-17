@@ -27,19 +27,19 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputBookISBN">ISBN</label>
-                                    <input name="nomeLivro" type="text" class="form-control"
+                                    <input name="isbnLivro" type="text" class="form-control"
                                            id="exampleInputBookISBN">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputState">Categoria do Livro</label>
-                                    <select id="inputState" name="nomeLivro" class="form-control">
+                                    <select id="inputState" name="categoriaLivro" class="form-control">
                                         <option selected>Selecione</option>
-                                        <option value="New">Nova Categoria</option>
+                                        <option value="categoria"></option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputBookQuantity">Quantidade</label>
-                                    <input name="nomeLivro" type="text" class="form-control"
+                                    <input name="qtdLivro" type="text" class="form-control"
                                            id="exampleInputBookQuantity">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Adicionar</button>

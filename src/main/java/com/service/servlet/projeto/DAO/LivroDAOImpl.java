@@ -7,20 +7,21 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LivroDAO extends GenericDAO<Livros> {
+public class LivroDAOImpl extends GenericDAO<Livros> {
 
     @Override
-    public void save(Livros livro) {
-        String sql = "INSERT INTO livros (isbn, nome, quantidade, categoria_id) VALUES (?, ?, ?, ?)";
+    public boolean save(Livros livro) {
+        String sql = "INSERT INTO livros (isbn, nome, categoria_id,quantidade) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, livro.getIsbn());
             stmt.setString(2, livro.getNome());
-            stmt.setInt(3, livro.getQuantidade());
-            stmt.setLong(4, livro.getCategoria().getId());
+            stmt.setLong(3, livro.getCategoria().getId());
+            stmt.setInt(4, livro.getQuantidade());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     @Override
@@ -77,12 +78,12 @@ public class LivroDAO extends GenericDAO<Livros> {
 
     @Override
     public void update(Livros livro) {
-        String sql = "UPDATE livros SET isbn = ?, nome = ?, quantidade = ?, categoria_id = ? WHERE id = ?";
+        String sql = "UPDATE livros SET isbn = ?, nome = ?, categoria_id = ?, quantidade = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, livro.getIsbn());
             stmt.setString(2, livro.getNome());
-            stmt.setInt(3, livro.getQuantidade());
-            stmt.setLong(4, livro.getCategoria().getId());
+            stmt.setLong(3, livro.getCategoria().getId());
+            stmt.setInt(4, livro.getQuantidade());
             stmt.setLong(5, livro.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
