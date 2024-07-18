@@ -93,28 +93,6 @@ public class UsuarioDAOImpl extends GenericDAO<Usuarios> {
         return usuario;
     }
 
-    public Usuarios findByEmailAndPassowrd(String email, String password) {
-        Usuarios usuario = null;
-        String sql = "SELECT * FROM usuarios WHERE email = ? and password = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, email);
-            stmt.setString(2, password);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                usuario = new Usuarios();
-                usuario.setId(rs.getLong("id"));
-                usuario.setNome(rs.getString("nome"));
-                usuario.setEmail(rs.getString("email"));
-                usuario.setSenha(rs.getString("senha"));
-                usuario.setAdmin(rs.getBoolean("isAdmin"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return usuario;
-    }
-
-
     @Override
     public void update(Usuarios usuario) {
         String sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, isAdmin = ? WHERE id = ?";

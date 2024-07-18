@@ -65,12 +65,36 @@
             </div>
 
             <div class="col-md-3">
-                <a>
+                <a href="all_users.jsp">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fa-solid fa-user fa-3x text-primary"></i><br/>
+                            <h4>Usuarios</h4>
+                            ---------------
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="all_categories.jsp">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fa-solid fa-list fa-3x text-primary"></i><br/>
+                            <h4>Categorias</h4>
+                            ---------------
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="webapp/logout.jsp">
                     <div class="card">
                         <div class="card-body text-center">
                             <i class="fas fa-sign-out-alt fa-3x text-primary"></i><br/>
-                            <h4>Deslogar</h4>
-                                ---------------
+                            <h4>Logout</h4>
+                            ---------------
                         </div>
                     </div>
                 </a>

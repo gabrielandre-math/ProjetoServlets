@@ -28,13 +28,14 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="text-center mb-4">Registrar</h4>
+
                     <c:if test="${not empty sucessMsg}">
                         <p class="text-center text-sucess">${sucessMsg}</p>
                         <c:remove var="sucessMsg" scope="session"/>
                     </c:if>
-                    <c:if test="${not empty failMsg}">
-                        <p class="text-center text-danger">${failMsg}</p>
-                        <c:remove var="failMsg" scope="session"/>
+                    <c:if test="${not empty failRegister}">
+                        <p class="text-center text-danger">${failRegister}</p>
+                        <c:remove var="failRegister" scope="session"/>
                     </c:if>
                     <c:if test="${not empty existUserMsg}">
                         <p class="text-center text-danger">${existUserMsg}</p>
