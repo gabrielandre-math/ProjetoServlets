@@ -41,6 +41,10 @@ public class Usuarios {
         this.email = email;
     }
 
+    public Usuarios(String email) {
+        this.email = email;
+    }
+
     public Long getId() {
         return id;
     }

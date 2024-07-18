@@ -15,7 +15,6 @@ import java.io.IOException;
 public class RegisterServlet extends HttpServlet {
     Usuarios usuario;
     private UsuarioDAOImpl usuarioDAOImpl;
-    HttpSession session;
 
     public void init() throws ServletException {
         super.init();
@@ -29,20 +28,21 @@ public class RegisterServlet extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
 
-            if(usuarioDAOImpl.findByEmail(email).getEmail() == null){
+            HttpSession session = request.getSession();
+
+            if(usuarioDAOImpl.findByEmail(email) == null){
                 usuario.setNome(nome);
                 usuario.setEmail(email);
                 usuario.setSenha(password);
                 usuario.setAdmin(false);
 
-                session = request.getSession();
                 boolean retorno = usuarioDAOImpl.save(usuario);
 
                 if (retorno) {
                     session.setAttribute("sucessMsg", "Registrado com sucesso...");
                     response.sendRedirect("register.jsp");
                 } else {
-                    session.setAttribute("failMsg", "Registro falhou...");
+                    session.setAttribute("failRegister", "Registro falhou...");
                     response.sendRedirect("register.jsp");
                 }
             }else{
