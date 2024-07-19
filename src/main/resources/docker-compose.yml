@@ -1,0 +1,15 @@
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: biblioteca
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+      - ./livros.csv:/docker-entrypoint-initdb.d/livros.csv
+      - ./categorias.csv:/docker-entrypoint-initdb.d/categorias.csv
