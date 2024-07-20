@@ -47,8 +47,13 @@ public class AddBooks extends HttpServlet {
 
             boolean verificar = livroDAO.save(livro);
             if (verificar) {
-                String path = "C:\\Users\\luucc\\OneDrive\\Documentos\\GitHub\\ProjetoServlets\\src\\main\\webapp\\books";
+                String path = getServletContext().getRealPath("/books");
                 File file = new File(path);
+                //Verifica se a pasta /books existe
+                if (!file.exists()) {
+                    file.mkdirs();
+                }
+
                 part.write(path + File.separator + fileName);
 
                 session.setAttribute("sucessMsg", "Livro adicionado com sucesso!");
