@@ -89,7 +89,7 @@
             </div>
 
             <div class="col-md-3">
-                <a href="webapp/logout.jsp">
+                <a href="logout.jsp">
                     <div class="card">
                         <div class="card-body text-center">
                             <i class="fas fa-sign-out-alt fa-3x text-primary"></i><br/>

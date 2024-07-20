@@ -6,6 +6,7 @@ public class Livros {
     private String nome;
     private int quantidade;
     private Categorias categoria;
+    private String imagem;
 
     public Livros() {
     }
@@ -23,6 +24,14 @@ public class Livros {
         this.nome = nome;
         this.quantidade = quantidade;
         this.categoria = categoria;
+    }
+
+    public Livros(String isbn, String nome, int quantidade, Categorias categoria, String imagem) {
+        this.isbn = isbn;
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.categoria = categoria;
+        this.imagem = imagem;
     }
 
     public Livros(Long id) {
@@ -77,6 +86,14 @@ public class Livros {
         this.categoria = categoria;
     }
 
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+
     @Override
     public String toString() {
         return "Livros{" +
@@ -85,6 +102,7 @@ public class Livros {
                 ", nome='" + nome + '\'' +
                 ", quantidade=" + quantidade +
                 ", categoria=" + categoria +
+                ", imagem=" + imagem +
                 '}';
     }
 }
