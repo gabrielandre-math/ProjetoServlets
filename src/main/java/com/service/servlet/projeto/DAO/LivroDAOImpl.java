@@ -11,18 +11,22 @@ public class LivroDAOImpl extends GenericDAO<Livros> {
 
     @Override
     public boolean save(Livros livro) {
-        String sql = "INSERT INTO livros (isbn, nome, categoria_id,quantidade) VALUES (?, ?, ?, ?)";
+
+        String sql = "INSERT INTO livros (isbn, nome, categoria_id, quantidade, imagem) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, livro.getIsbn());
             stmt.setString(2, livro.getNome());
             stmt.setLong(3, livro.getCategoria().getId());
             stmt.setInt(4, livro.getQuantidade());
+            stmt.setString(5, livro.getImagem());
             stmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
+
 
     @Override
     public List<Livros> findAll() {
@@ -53,7 +57,11 @@ public class LivroDAOImpl extends GenericDAO<Livros> {
     @Override
     public Livros findById(Long id) {
         Livros livro = null;
-        String sql = "SELECT l.*, c.nome as categoria_nome FROM livros l JOIN categorias c ON l.categoria_id = c.id WHERE l.id = ?";
+        String sql = "SELECT l.*, c.nome AS categoria_nome, i.id AS images_id, i.name AS images_nome, i.data AS images_data " +
+                "FROM livros l " +
+                "JOIN categorias c ON l.categoria_id = c.id " +
+                "LEFT JOIN images i ON l.image_id = i.id " +
+                "WHERE l.id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -63,11 +71,11 @@ public class LivroDAOImpl extends GenericDAO<Livros> {
                 livro.setIsbn(rs.getString("isbn"));
                 livro.setNome(rs.getString("nome"));
                 livro.setQuantidade(rs.getInt("quantidade"));
+                livro.setImagem(rs.getString("imagem"));
 
                 Categorias categoria = new Categorias();
                 categoria.setId(rs.getLong("categoria_id"));
                 categoria.setNome(rs.getString("categoria_nome"));
-
                 livro.setCategoria(categoria);
             }
         } catch (SQLException e) {
@@ -76,15 +84,31 @@ public class LivroDAOImpl extends GenericDAO<Livros> {
         return livro;
     }
 
+    public boolean existsByName(String nome) {
+        String sql = "SELECT COUNT(*) FROM livros WHERE nome = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, nome);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
     @Override
     public void update(Livros livro) {
-        String sql = "UPDATE livros SET isbn = ?, nome = ?, categoria_id = ?, quantidade = ? WHERE id = ?";
+        String sql = "UPDATE livros SET isbn = ?, nome = ?, categoria_id = ?, quantidade = ?, imagem = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, livro.getIsbn());
             stmt.setString(2, livro.getNome());
             stmt.setLong(3, livro.getCategoria().getId());
             stmt.setInt(4, livro.getQuantidade());
-            stmt.setLong(5, livro.getId());
+            stmt.setString(5, livro.getImagem());
+            stmt.setLong(6, livro.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

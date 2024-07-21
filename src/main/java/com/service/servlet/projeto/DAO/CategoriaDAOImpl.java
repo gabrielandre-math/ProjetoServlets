@@ -14,6 +14,7 @@ public class CategoriaDAOImpl extends GenericDAO<Categorias> {
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, categoria.getNome());
             stmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
