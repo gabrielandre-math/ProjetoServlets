@@ -94,7 +94,7 @@ public class UsuarioDAOImpl extends GenericDAO<Usuarios> {
     }
 
     @Override
-    public void update(Usuarios usuario) {
+    public boolean update(Usuarios usuario) {
         String sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, isAdmin = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, usuario.getNome());
@@ -106,10 +106,11 @@ public class UsuarioDAOImpl extends GenericDAO<Usuarios> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     @Override
-    public void delete(Long id) {
+    public boolean delete(Long id) {
         String sql = "DELETE FROM usuarios WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
@@ -117,5 +118,6 @@ public class UsuarioDAOImpl extends GenericDAO<Usuarios> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 }
