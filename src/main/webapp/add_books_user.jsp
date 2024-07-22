@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Adm: Adicionar Livros</title>
-    <%@include file="allCss.jsp"%>
+    <%@include file="all_Component/allCss.jsp"%>
 
     <style>
         body {
@@ -148,7 +148,9 @@
         </div>
     </div>
 </div>
-
+<div style="margin-top: 40px;">
+    <%@include file="/all_Component/footer.jsp" %>
+</div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
