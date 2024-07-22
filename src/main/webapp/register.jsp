@@ -1,5 +1,4 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%@ page isELIgnored="false" %>
 
 <!DOCTYPE html>
