@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin: Todos os Livros</title>
-    <%@include file="allCss.jsp" %>
+    <title>Admin: Todos os Pedidos</title>
+    <%@include file="/all_Component/allCss.jsp" %>
 
     <style>
         /* Estilos adicionais para garantir a responsividade */
@@ -42,11 +42,10 @@
         <table class="table table-striped table-bordered">
             <thead class="bg-primary text-white">
             <tr>
-                <th scope="col">ID</th>
+                <th scope="col">Pedido ID</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Quantidade</th>
-                <th scope="col">Atualizar</th>
+                <th scope="col">Email</th>
+                <th scope="col">Nome do Livro</th>
             </tr>
             </thead>
             <tbody>
@@ -56,12 +55,8 @@
                     <span class="full-name">Mark Otto</span>
                     <span class="shorten-name">Mark O.</span>
                 </td>
-                <td>Otto</td>
-                <td>10</td>
-                <td>
-                    <a href="#" class="btn btn-sm btn-primary">Editar</a>
-                    <a href="#" class="btn btn-sm btn-danger">Excluir</a>
-                </td>
+                <td>mark.otto@example.com</td>
+                <td>Livro Exemplo 1</td>
             </tr>
             <tr>
                 <th scope="row">2</th>
@@ -69,12 +64,8 @@
                     <span class="full-name">Jacob Thornton</span>
                     <span class="shorten-name">Jacob T.</span>
                 </td>
-                <td>Thornton</td>
-                <td>15</td>
-                <td>
-                    <a href="#" class="btn btn-sm btn-primary">Editar</a>
-                    <a href="#" class="btn btn-sm btn-danger">Excluir</a>
-                </td>
+                <td>jacob.thornton@example.com</td>
+                <td>Livro Exemplo 2</td>
             </tr>
             <tr>
                 <th scope="row">3</th>
@@ -82,17 +73,12 @@
                     <span class="full-name">Larry the Bird</span>
                     <span class="shorten-name">Larry B.</span>
                 </td>
-                <td>the Bird</td>
-                <td>20</td>
-                <td>
-                    <a href="#" class="btn btn-sm btn-primary">Editar</a>
-                    <a href="#" class="btn btn-sm btn-danger">Excluir</a>
-                </td>
+                <td>larry.bird@example.com</td>
+                <td>Livro Exemplo 3</td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
 </body>
-
 </html>

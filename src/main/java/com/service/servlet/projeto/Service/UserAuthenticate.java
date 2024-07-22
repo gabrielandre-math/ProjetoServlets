@@ -2,6 +2,7 @@ package com.service.servlet.projeto.Service;
 
 import com.service.servlet.projeto.Model.Usuarios;
 
+import java.sql.Connection;
 import java.util.List;
 
 public class UserAuthenticate{
