@@ -14,7 +14,7 @@ import java.io.IOException;
 
 @WebServlet("/add_books")
 @MultipartConfig
-public class AddBooks extends HttpServlet {
+public class AdicionarLivros extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Categorias categoria = new Categorias();

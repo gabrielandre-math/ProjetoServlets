@@ -10,14 +10,12 @@ import jakarta.servlet.annotation.*;
 
 @WebServlet("/index")
 public class InitialPage extends HttpServlet {
-    Usuarios usuario;
-    UsuarioDAOImpl usuarioDAOImpl;
+    HttpSession session;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        usuario = new Usuarios();
-        usuarioDAOImpl = new UsuarioDAOImpl();
+        session.setAttribute("userRole", "user");
     }
 
     @Override

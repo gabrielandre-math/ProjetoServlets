@@ -18,21 +18,18 @@ public class UsuarioDAOImpl extends GenericDAO<Usuarios> {
 
     @Override
     public boolean save(Usuarios usuario) {
-        boolean retorno = false;
         String sql = "INSERT INTO usuarios (nome, email, senha, isadmin) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());
             stmt.setString(3, usuario.getSenha());
             stmt.setBoolean(4, usuario.isAdmin());
-            int i = stmt.executeUpdate();
-            if (i == 1) {
-                retorno = true;
-            }
+            stmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-        return retorno;
     }
 
     @Override
@@ -98,7 +95,7 @@ public class UsuarioDAOImpl extends GenericDAO<Usuarios> {
     }
 
     @Override
-    public void update(Usuarios usuario) {
+    public boolean update(Usuarios usuario) {
         String sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, isAdmin = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, usuario.getNome());
@@ -107,19 +104,23 @@ public class UsuarioDAOImpl extends GenericDAO<Usuarios> {
             stmt.setBoolean(4, usuario.isAdmin());
             stmt.setLong(5, usuario.getId());
             stmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
     @Override
-    public void delete(Long id) {
+    public boolean delete(Long id) {
         String sql = "DELETE FROM usuarios WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
             stmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }
