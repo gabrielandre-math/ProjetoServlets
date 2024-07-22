@@ -58,7 +58,7 @@ public class CategoriaDAOImpl extends GenericDAO<Categorias> {
     }
 
     @Override
-    public boolean update(Categorias categoria) {
+    public void update(Categorias categoria) {
         String sql = "UPDATE categorias SET nome = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, categoria.getNome());
@@ -67,11 +67,10 @@ public class CategoriaDAOImpl extends GenericDAO<Categorias> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
     }
 
     @Override
-    public boolean delete(Long id) {
+    public void delete(Long id) {
         String sql = "DELETE FROM categorias WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
@@ -79,6 +78,5 @@ public class CategoriaDAOImpl extends GenericDAO<Categorias> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
     }
 }
