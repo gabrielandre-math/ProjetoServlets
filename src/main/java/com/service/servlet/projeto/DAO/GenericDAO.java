@@ -19,9 +19,9 @@ public abstract class GenericDAO<T> {
 
     public abstract T findById(Long id);
 
-    public abstract void update(T entity);
+    public abstract boolean update(T entity);
 
-    public abstract void delete(Long id);
+    public abstract boolean delete(Long id);
 
     public void close() {
         try {

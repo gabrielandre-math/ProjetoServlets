@@ -2,9 +2,9 @@
 FROM postgres:latest
 
 # Defina as variáveis de ambiente
-ENV POSTGRES_DB=biblioteca
+ENV POSTGRES_DB=postgres
 ENV POSTGRES_USER=postgres
-ENV POSTGRES_PASSWORD=1234
+ENV POSTGRES_PASSWORD=password
 
 # Copie o script de inicialização e o arquivo CSV para o contêiner
 COPY init-db.sh /docker-entrypoint-initdb.d/
