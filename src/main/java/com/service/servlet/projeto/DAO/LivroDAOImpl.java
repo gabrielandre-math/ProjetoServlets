@@ -40,7 +40,6 @@ public class LivroDAOImpl extends GenericDAO<Livros> {
                 livro.setIsbn(rs.getString("isbn"));
                 livro.setNome(rs.getString("nome"));
                 livro.setQuantidade(rs.getInt("quantidade"));
-                livro.setImagem(rs.getString("imagem"));
 
                 Categorias categoria = new Categorias();
                 categoria.setId(rs.getLong("categoria_id"));
@@ -58,9 +57,10 @@ public class LivroDAOImpl extends GenericDAO<Livros> {
     @Override
     public Livros findById(Long id) {
         Livros livro = null;
-        String sql = "SELECT l.*, c.nome AS categoria_nome " +
+        String sql = "SELECT l.*, c.nome AS categoria_nome, i.id AS images_id, i.name AS images_nome, i.data AS images_data " +
                 "FROM livros l " +
                 "JOIN categorias c ON l.categoria_id = c.id " +
+                "LEFT JOIN images i ON l.image_id = i.id " +
                 "WHERE l.id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
@@ -100,31 +100,29 @@ public class LivroDAOImpl extends GenericDAO<Livros> {
 
 
     @Override
-    public boolean update(Livros livro) {
-        String sql = "UPDATE livros SET isbn = ?, nome = ?, quantidade = ? WHERE id = ?";
+    public void update(Livros livro) {
+        String sql = "UPDATE livros SET isbn = ?, nome = ?, categoria_id = ?, quantidade = ?, imagem = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, livro.getIsbn());
             stmt.setString(2, livro.getNome());
-            stmt.setInt(3, livro.getQuantidade());
-            stmt.setLong(4, livro.getId());
+            stmt.setLong(3, livro.getCategoria().getId());
+            stmt.setInt(4, livro.getQuantidade());
+            stmt.setString(5, livro.getImagem());
+            stmt.setLong(6, livro.getId());
             stmt.executeUpdate();
-            return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
     }
 
     @Override
-    public boolean delete(Long id) {
+    public void delete(Long id) {
         String sql = "DELETE FROM livros WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
             stmt.executeUpdate();
-            return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
     }
 }
