@@ -1,3 +1,31 @@
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+
+<%
+    // Verifica se a sessão já existe
+    HttpSession currentSession = request.getSession(false);
+
+    // Se a sessão não existir, cria uma nova e define 'loggedIn' como false
+    if (currentSession == null) {
+        currentSession = request.getSession(true);
+        currentSession.setAttribute("loggedIn", false);
+    }
+
+    // Obtém o valor do atributo 'loggedIn'
+    Boolean loggedIn = (Boolean) currentSession.getAttribute("loggedIn");
+
+    // Se 'loggedIn' for nulo, define como false
+    if (loggedIn == null) {
+        loggedIn = false;
+        currentSession.setAttribute("loggedIn", loggedIn);
+    }
+
+    // Define o atributo 'loggedIn' na requisição
+    request.setAttribute("loggedIn", loggedIn);
+%>
+<%
+    // Para fins de depuração. Utilizei para monitorar o comportamento da sessão
+    System.out.println("LoggedIn: " + session.getAttribute("loggedIn"));
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +82,7 @@
             opacity: 1;
             color: white; /* Cor do logo no segundo navbar */
         }
-        @media (max-width: 767.98px) {
+        @media (max-width: 768px) {
             .nav-item-spacer {
                 display: block;
                 height: 4px;
@@ -70,13 +98,19 @@
             margin-right: 6px;
             margin-left: 6px;
         }
+        @media (max-width: 768px) {
+            .form-control {
+                background-color: #fff;
+                color: #000;
+            }
+        }
     </style>
 </head>
 <body>
 <!-- Navbar 1 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light diagonal-1" id="navbar1">
     <div class="container-fluid">
-        <a class="navbar-brand font-style ms-2" id="main-logo" href="index.jsp">
+        <a class="navbar-brand font-style ms-2" id="main-logo" href="../index.jsp">
             ServletBook <i class="bi bi-layers-fill"></i>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,10 +121,21 @@
                 <input class="form-control me-2 search-bar" type="search" placeholder="Buscar livro" aria-label="Buscar livro">
                 <button class="btn bg-custom text-white" type="submit">Buscar</button>
             </form>
-            <div class="navbar-nav ms-auto d-flex">
-                <a class="btn bg-custom text-white me-2 mb-2 mb-lg-0" href="login.jsp">Entrar</a>
-                <a class="btn btn-primary text-white me-2 mb-lg-0" href="register.jsp">Registrar</a>
-            </div>
+
+            <c:choose>
+                <c:when test="${loggedIn == false}">
+                    <div class="navbar-nav ms-auto d-flex">
+                        <a class="btn bg-custom text-white me-2 mb-2 mb-lg-0" href="login.jsp">Entrar</a>
+                        <a class="btn btn-primary text-white me-2 mb-lg-0" href="register.jsp">Registrar</a>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="navbar-nav ms-auto d-flex">
+                        <a class="btn bg-custom text-white me-2 mb-2 mb-lg-0" href="logout.jsp">Sair</a>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+
         </div>
     </div>
 </nav>

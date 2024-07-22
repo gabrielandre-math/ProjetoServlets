@@ -1,6 +1,7 @@
 package com.service.servlet.projeto.Controller;
 
 import com.service.servlet.projeto.DAO.UsuarioDAOImpl;
+import com.service.servlet.projeto.DB.DBConnection;
 import com.service.servlet.projeto.Model.Usuarios;
 import com.service.servlet.projeto.Service.UserAuthenticate;
 import jakarta.servlet.ServletException;
@@ -11,56 +12,52 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.service.servlet.projeto.Constantes.*;
+import java.sql.Connection;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    List<Usuarios> usuarios;
-    Usuarios usuario;
     private UsuarioDAOImpl usuarioDAOImpl;
-    HttpSession session;
     UserAuthenticate authenticate;
-
+    Boolean loggedIn = false;
     public void init() throws ServletException {
         super.init();
-        usuario = new Usuarios();
         usuarioDAOImpl = new UsuarioDAOImpl();
         authenticate = new UserAuthenticate();
-        usuarios = new ArrayList<>();
-
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try{
+        try {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
 
-            session = request.getSession();
+            // Obter a conexão com o banco de dados
+            Connection connection = DBConnection.getConnection();
+            usuarioDAOImpl.setConnection(connection);
 
-            if(email.equals(admEmail) && password.equals(admPassword)){
+            // Verificar se o usuário existe no banco de dados
+            Usuarios usuario = usuarioDAOImpl.findByEmail(email);
+
+            if (usuario != null && usuario.getSenha().equals(password)) {
+                HttpSession session = request.getSession();
+                session.setAttribute("loggedIn", true);
                 session.setAttribute("usuario", usuario);
-                response.sendRedirect("admin/home-admin.jsp");
-            }else{
-                usuario.setEmail(email);
-                usuario.setSenha(password);
 
-                usuarios = usuarioDAOImpl.findAll();
-
-                var authUser = authenticate.authenticate(usuario,usuarios);
-                if(authUser != null){
-                    session.setAttribute("usuario", authUser);
-                    response.sendRedirect("home.jsp");
+                // Verificar se o usuário é administrador
+                if (usuario.isAdmin()) {
+                    response.sendRedirect("admin/home-admin.jsp");
                 } else {
-                    session.setAttribute("loginFail", "Email ou Senha incorretos...");
-                    response.sendRedirect("login.jsp");
+                    response.sendRedirect("home.jsp");
                 }
+            } else {
+                HttpSession session = request.getSession();
+                session.setAttribute("loginFail", "Email ou Senha incorretos...");
+                session.setAttribute("loggedIn", false);
+                response.sendRedirect("login.jsp");
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
+            response.sendRedirect("login.jsp");
         }
     }
 }

@@ -12,17 +12,21 @@ public class UsuarioDAOImpl extends GenericDAO<Usuarios> {
         super();
     }
 
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
     @Override
     public boolean save(Usuarios usuario) {
         boolean retorno = false;
-        String sql = "INSERT INTO usuarios (nome, email, senha,isadmin) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO usuarios (nome, email, senha, isadmin) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());
             stmt.setString(3, usuario.getSenha());
             stmt.setBoolean(4, usuario.isAdmin());
             int i = stmt.executeUpdate();
-            if(i == 1){
+            if (i == 1) {
                 retorno = true;
             }
         } catch (SQLException e) {

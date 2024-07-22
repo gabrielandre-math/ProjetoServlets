@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: luucc
-  Date: 13/07/2024
-  Time: 13:59
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%@ page isELIgnored="false" %>
@@ -13,97 +6,147 @@
     <title>Admin: Home</title>
     <%@include file="allCss.jsp"%>
     <style type="text/css">
-        a{
+        body {
+            background-color: #f7f7f7;
+        }
+        a {
             text-decoration: none;
             color: black;
         }
-        a:hover{
+        a:hover {
             text-decoration: none;
             color: black;
+        }
+        .card-body i {
+            font-size: 2rem; /* Reduzindo o tamanho dos ícones */
+        }
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
     </style>
+
 </head>
 <body>
-    <%@include file="navbar.jsp"%>
-    <div class="container">
-        <div class="row p-5">
-
-            <div class="col-md-3">
-                <a href="add_books.jsp">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <i class="fas fa-plus-square fa-3x text-primary"></i><br/>
-                            <h4>Adicionar Livro</h4>
-                                ---------------
-                        </div>
+<%@include file="/all_Component/navbar.jsp"%>
+<div class="container">
+    <div class="row p-5">
+        <!-- Usando col-12 col-md-6 col-lg-4 para responsividade -->
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <a href="add_books.jsp">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-plus-square text-primary"></i><br/>
+                        <h4>Adicionar Livro</h4>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
+        </div>
 
-            <div class="col-md-3">
-                <a href="all_books.jsp">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <i class="fas fa-book-open fa-3x text-warning"></i><br/>
-                            <h4>Todos os Livros</h4>
-                                ---------------
-                        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <a href="all_books.jsp">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-book-open text-warning"></i><br/>
+                        <h4>Todos os Livros</h4>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
+        </div>
 
-            <div class="col-md-3">
-                <a href="orders.jsp">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <i class="fas fa-box-open fa-3x text-warning"></i><br/>
-                            <h4>Pedidos</h4>
-                                ---------------
-                        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <a href="orders.jsp">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-box-open text-warning"></i><br/>
+                        <h4>Pedidos</h4>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
+        </div>
 
-            <div class="col-md-3">
-                <a href="all_users.jsp">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <i class="fa-solid fa-user fa-3x text-primary"></i><br/>
-                            <h4>Usuarios</h4>
-                            ---------------
-                        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <a href="all_users.jsp">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="fa-solid fa-user text-primary"></i><br/>
+                        <h4>Usuários</h4>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
+        </div>
 
-            <div class="col-md-3">
-                <a href="all_categories.jsp">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <i class="fa-solid fa-list fa-3x text-primary"></i><br/>
-                            <h4>Categorias</h4>
-                            ---------------
-                        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <a href="all_categories.jsp">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="fa-solid fa-list text-primary"></i><br/>
+                        <h4>Categorias</h4>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
+        </div>
 
-            <div class="col-md-3">
-                <a href="logout.jsp">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <i class="fas fa-sign-out-alt fa-3x text-primary"></i><br/>
-                            <h4>Logout</h4>
-                            ---------------
-                        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <a href="logout.jsp">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-sign-out-alt text-primary"></i><br/>
+                        <h4>Logout</h4>
                     </div>
-                </a>
-            </div>
-
+                </div>
+            </a>
         </div>
     </div>
-    <div style="margin-top: 130px;">
-        <%@include file="footer.jsp"%>
-    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('mouseover', () => {
+                anime({
+                    targets: card,
+                    scale: 1.0,
+                    duration: 150,
+                    easing: 'easeInOutQuad'
+                });
+            });
+            card.addEventListener('mouseout', () => {
+                anime({
+                    targets: card,
+                    scale: 1,
+                    duration: 300,
+                    easing: 'easeInOutQuad'
+                });
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        var mainLogo = $('#main-logo');
+        var secondaryLogo = $('#secondary-logo');
+        var navbar1 = $('#navbar1');
+
+        $(window).scroll(function() {
+            var navbar1Height = navbar1.outerHeight();
+            if ($(this).scrollTop() > navbar1Height) {
+                mainLogo.addClass('hidden');
+                secondaryLogo.removeClass('hidden').addClass('visible');
+            } else {
+                mainLogo.removeClass('hidden');
+                secondaryLogo.removeClass('visible').addClass('hidden');
+            }
+        });
+    });
+</script>
 </body>
+<footer>
+    <%@ include file="/all_Component/footer.jsp"%>
+</footer>
 </html>
