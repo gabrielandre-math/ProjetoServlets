@@ -1,5 +1,4 @@
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
-
 <%
     // Verifica se a sessão já existe
     HttpSession currentSession = request.getSession(false);
@@ -125,13 +124,13 @@
             <c:choose>
                 <c:when test="${loggedIn == false}">
                     <div class="navbar-nav ms-auto d-flex">
-                        <a class="btn bg-custom text-white me-2 mb-2 mb-lg-0" href="login.jsp">Entrar</a>
-                        <a class="btn btn-primary text-white me-2 mb-lg-0" href="register.jsp">Registrar</a>
+                        <a class="btn bg-custom text-white me-2 mb-2 mb-lg-0" href="../login.jsp">Entrar</a>
+                        <a class="btn btn-primary text-white me-2 mb-lg-0" href="../register.jsp">Registrar</a>
                     </div>
                 </c:when>
                 <c:otherwise>
                     <div class="navbar-nav ms-auto d-flex">
-                        <a class="btn bg-custom text-white me-2 mb-2 mb-lg-0" href="logout.jsp">Sair</a>
+                        <a class="btn bg-custom text-white me-2 mb-2 mb-lg-0" href="../logout.jsp">Sair</a>
                     </div>
                 </c:otherwise>
             </c:choose>
