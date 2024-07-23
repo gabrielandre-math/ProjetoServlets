@@ -37,60 +37,47 @@
 <body>
 <%@include file="/all_Component/navbar.jsp" %>
 
-<div class="container my-4">
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-            <thead class="bg-primary text-white">
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Quantidade</th>
-                <th scope="col">Atualizar</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>
-                    <span class="full-name">Mark Otto</span>
-                    <span class="shorten-name">Mark O.</span>
-                </td>
-                <td>Otto</td>
-                <td>10</td>
-                <td>
-                    <a href="#" class="btn btn-sm btn-primary">Editar</a>
-                    <a href="#" class="btn btn-sm btn-danger">Excluir</a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>
-                    <span class="full-name">Jacob Thornton</span>
-                    <span class="shorten-name">Jacob T.</span>
-                </td>
-                <td>Thornton</td>
-                <td>15</td>
-                <td>
-                    <a href="#" class="btn btn-sm btn-primary">Editar</a>
-                    <a href="#" class="btn btn-sm btn-danger">Excluir</a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>
-                    <span class="full-name">Larry the Bird</span>
-                    <span class="shorten-name">Larry B.</span>
-                </td>
-                <td>the Bird</td>
-                <td>20</td>
-                <td>
-                    <a href="#" class="btn btn-sm btn-primary">Editar</a>
-                    <a href="#" class="btn btn-sm btn-danger">Excluir</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card fade-in" id="form-card">
+                <div class="card-body">
+                    <h4 class="text-center title">Livros do Usuário</h4>
+                    <c:if test="${not empty sucessMsg}">
+                        <div class="alert alert-success text-center">
+                                ${sucessMsg}
+                            <c:remove var="sucessMsg" scope="session"/>
+                        </div>
+                    </c:if>
+                    <c:if test="${not empty failMsg}">
+                        <div class="alert alert-danger text-center">
+                                ${failMsg}
+                            <c:remove var="failMsg" scope="session"/>
+                        </div>
+                    </c:if>
+
+                    <table class="table table-striped">
+                        <thead class="bg-primary text-white">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Categoria</th>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Ação</th>
+                        </tr>
+                        </thead>
+                    </table>
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            setTimeout(function() {
+                                document.getElementById('form-card').classList.add('visible');
+                            }, 200);
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

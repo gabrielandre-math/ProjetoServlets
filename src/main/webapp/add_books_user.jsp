@@ -1,11 +1,16 @@
+<%@ page import="com.service.servlet.projeto.DAO.LivroDAOImpl" %>
+<%@ page import="com.service.servlet.projeto.Model.Livros" %>
+<%@ page import="com.service.servlet.projeto.Model.Usuarios" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>Adm: Adicionar Livros</title>
-    <%@include file="all_Component/allCss.jsp"%>
+    <title>Adicionar Livros</title>
+    <%@ include file="all_Component/allCss.jsp" %>
 
     <style>
+        /* Seus estilos */
         body {
             background-color: #f7f7f7;
         }
@@ -71,7 +76,7 @@
     </style>
 </head>
 <body>
-<%@include file="/all_Component/navbar.jsp" %>
+<%@ include file="/all_Component/navbar.jsp" %>
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6">
@@ -90,73 +95,44 @@
                             <c:remove var="failMsg" scope="session"/>
                         </div>
                     </c:if>
-                    <form action="../add_books" method="post" enctype="multipart/form-data">
+
+                    <%-- Lista todos os livros disponíveis --%>
+                    <%
+                        LivroDAOImpl livroDAO = new LivroDAOImpl();
+                        List<Livros> livros = livroDAO.findAll();
+                    %>
+                    <form action="../add_books_user" method="post">
+                        <input type="hidden" name="userId" value="${usuario.id}">
                         <div class="form-group mb-3">
-                            <label for="nomeLivro">Nome do Livro</label>
-                            <input name="nomeLivro" type="text" class="form-control" id="nomeLivro" placeholder="Digite o nome do livro" required>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="isbnLivro">ISBN</label>
-                            <input name="isbnLivro" type="text" class="form-control" id="isbnLivro" placeholder="Digite o ISBN" required>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="categoriaLivro">Categoria</label>
-                            <select id="categoriaLivro" name="categoriaLivro" class="form-select" required>
-                                <option value="" disabled selected>Selecione</option>
-                                <!-- As opções de categoria -->
-                                <option selected>Selecione</option>
-                                <option value="1">Romance</option>
-                                <option value="2">Clássico</option>
-                                <option value="3">Tragédia</option>
-                                <option value="4">Estratégia</option>
-                                <option value="5">Fantasia</option>
-                                <option value="6">Ficção Científica</option>
-                                <option value="7">Épico</option>
-                                <option value="8">Literatura Brasileira</option>
-                                <option value="9">Mágico Realismo</option>
-                                <option value="10">Filosofia</option>
-                                <option value="11">Política</option>
-                                <option value="12">Ficção</option>
-                                <option value="13">Alemã</option>
-                                <option value="14">Biografia</option>
-                                <option value="15">Finanças</option>
-                                <option value="16">Infantil</option>
-                                <option value="17">Suspense</option>
-                                <option value="18">Romance Brasileiro</option>
-                                <option value="19">Policial</option>
-                                <option value="20">Aventura</option>
-                                <option value="21">Ficção Cristã</option>
-                                <option value="22">Teatro</option>
+                            <label for="livroSelecionado">Selecione um Livro</label>
+                            <select name="livroId" id="livroSelecionado" class="form-select" required>
+                                <%
+                                    for(Livros livro : livros){
+                                %>
+                                    <option><%=livro.getNome()%></option>
+                                <%
+                                    }
+                                %>
                             </select>
                         </div>
                         <div class="form-group mb-3">
                             <label for="qtdLivro">Quantidade</label>
-                            <input name="qtdLivro" type="number" class="form-control" id="qtdLivro" placeholder="Digite a quantidade" min="1" required>
+                            <input name="qtdLivro" type="number" maxlength="1" class="form-control" id="qtdLivro" value="1" required>
                         </div>
-                        <div class="form-group mb-3">
-                            <label for="imagemLivro">Imagem</label>
-                            <label class="custom-file-upload">
-                                <input type="file" name="imagemLivro" id="imagemLivro" class="custom-file-input">
-                                Escolher Arquivo
-                            </label>
-                        </div>
-                        <button type="submit" class="btn bg-custom text-white w-100 d-block">Adicionar</button>
+                        <button type="submit" class="btn btn-primary">Adicionar Livro</button>
                     </form>
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            setTimeout(function() {
+                                document.getElementById('form-card').classList.add('visible');
+                            }, 200);
+                        });
+                    </script>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div style="margin-top: 40px;">
-    <%@include file="/all_Component/footer.jsp" %>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        setTimeout(function() {
-            document.getElementById('form-card').classList.add('visible');
-        }, 200);
-    });
-</script>
 </body>
 </html>

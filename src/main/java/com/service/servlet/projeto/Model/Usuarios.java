@@ -1,5 +1,6 @@
 package com.service.servlet.projeto.Model;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Usuarios {
@@ -8,6 +9,7 @@ public class Usuarios {
     private String email;
     private String senha;
     private boolean isAdmin;
+    private List<Livros> livros;
 
     public Usuarios() {
     }
@@ -29,11 +31,12 @@ public class Usuarios {
         this.senha = senha;
     }
 
-    public Usuarios(Long id, String nome, String email, String senha) {
+    public Usuarios(Long id, String nome, String email, String senha, List<Livros> livros) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.livros = livros;
     }
 
     public Usuarios(String senha, String email) {
@@ -83,6 +86,14 @@ public class Usuarios {
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+    public List<Livros> getLivros() {
+        return livros;
+    }
+
+    public void setLivros(List<Livros> livros) {
+        this.livros = livros;
     }
 
     @Override

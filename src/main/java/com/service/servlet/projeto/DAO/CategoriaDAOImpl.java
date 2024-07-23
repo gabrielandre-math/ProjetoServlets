@@ -24,7 +24,7 @@ public class CategoriaDAOImpl extends GenericDAO<Categorias> {
     @Override
     public List<Categorias> findAll() {
         List<Categorias> categorias = new ArrayList<>();
-        String sql = "SELECT * FROM categorias";
+        String sql = "SELECT * FROM categorias ORDER BY id";
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {

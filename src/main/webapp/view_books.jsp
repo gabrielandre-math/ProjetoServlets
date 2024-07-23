@@ -128,12 +128,13 @@
                 </div>
             </div>
             <div class="row basic-staggering-demo text-center p-3">
-                <a href="" class="btn btn-primary">Adicionar ao Carrinho</a>
+                <a href="" class="btn btn-primary">Pegar emprestado</a>
             </div>
             <%
                 }
             %>
     </div>
+</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

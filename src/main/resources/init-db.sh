@@ -2,7 +2,7 @@
 set -e
 
 # Conectar ao banco de dados e verificar se a tabela existe
-TABLE_EXISTS=$(psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -t -c "SELECT to_regclass('public.usuarios');")
+TABLE_EXISTS=$(psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -t -c "SELECT to_regclass('public.livros');")
 
 # Se a tabela não existir, cria a tabela e popula o banco de dados com o arquivo CSV
 if [ "$TABLE_EXISTS" = " " ]; then
