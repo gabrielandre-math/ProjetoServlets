@@ -1,5 +1,7 @@
 package com.service.servlet.projeto.Model;
 
+import java.util.List;
+
 public class Livros {
     private Long id;
     private String isbn;
@@ -9,6 +11,7 @@ public class Livros {
     private String imagem;
     private String novoVelho;
     private String status;
+    private List<Usuarios> usuario;
 
     public Livros() {
     }
@@ -28,7 +31,7 @@ public class Livros {
         this.categoria = categoria;
     }
 
-    public Livros(String isbn, String nome, int quantidade, Categorias categoria, String imagem, String novoVelho, String status) {
+    public Livros(String isbn, String nome, int quantidade, Categorias categoria, String imagem, String novoVelho, String status, Usuarios usuario) {
         this.isbn = isbn;
         this.nome = nome;
         this.quantidade = quantidade;
@@ -114,6 +117,14 @@ public class Livros {
         this.status = status;
     }
 
+    public List<Usuarios> getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(List<Usuarios> usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public String toString() {
         return "Livros{" +
@@ -124,6 +135,7 @@ public class Livros {
                 ", categoria=" + categoria +
                 ", imagem='" + imagem + '\'' +
                 ", novoVelho='" + novoVelho + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

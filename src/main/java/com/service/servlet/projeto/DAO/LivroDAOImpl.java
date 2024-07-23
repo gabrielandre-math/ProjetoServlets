@@ -30,6 +30,19 @@ public class LivroDAOImpl extends GenericDAO<Livros> {
         }
     }
 
+    public boolean saveUser(Usuarios usuario) {
+
+        String sql = "INSERT INTO livros (usuario_id) VALUES (?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, usuario.getId());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     @Override
     public List<Livros> findAll() {

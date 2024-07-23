@@ -1,5 +1,6 @@
 package com.service.servlet.projeto.DAO;
 
+import com.service.servlet.projeto.Model.Livros;
 import com.service.servlet.projeto.Model.Usuarios;
 
 import java.sql.*;
@@ -96,19 +97,48 @@ public class UsuarioDAOImpl extends GenericDAO<Usuarios> {
 
     @Override
     public boolean update(Usuarios usuario) {
-        String sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ? WHERE id = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, usuario.getNome());
-            stmt.setString(2, usuario.getEmail());
-            stmt.setString(3, usuario.getSenha());
-            stmt.setLong(4, usuario.getId());
-            stmt.executeUpdate();
+        String updateUsuarioSQL = "UPDATE usuarios SET nome = ?, email = ?, senha = ? WHERE id = ?";
+        String deleteLivrosSQL = "DELETE FROM usuarios_livros WHERE usuario_id = ?";
+        String insertLivrosSQL = "INSERT INTO usuarios_livros (usuario_id, livro_id) VALUES (?, ?)";
+
+        try (PreparedStatement updateStmt = connection.prepareStatement(updateUsuarioSQL);
+             PreparedStatement deleteStmt = connection.prepareStatement(deleteLivrosSQL);
+             PreparedStatement insertStmt = connection.prepareStatement(insertLivrosSQL)) {
+
+            connection.setAutoCommit(false); // Start transaction
+
+            // Update user information
+            updateStmt.setString(1, usuario.getNome());
+            updateStmt.setString(2, usuario.getEmail());
+            updateStmt.setString(3, usuario.getSenha());
+            updateStmt.setLong(4, usuario.getId());
+            updateStmt.executeUpdate();
+
+            // Delete existing books associated with the user
+            deleteStmt.setLong(1, usuario.getId());
+            deleteStmt.executeUpdate();
+
+            // Insert new books associated with the user
+            for (Livros livro : usuario.getLivros()) {
+                insertStmt.setLong(1, usuario.getId());
+                insertStmt.setLong(2, livro.getId());
+                insertStmt.addBatch();
+            }
+            insertStmt.executeBatch();
+
+            connection.commit(); // Commit transaction
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                connection.rollback(); // Rollback transaction on error
+            } catch (SQLException rollbackException) {
+                rollbackException.printStackTrace();
+            }
             return false;
         }
     }
+
 
     @Override
     public boolean delete(Long id) {

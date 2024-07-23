@@ -29,3 +29,11 @@ CREATE TABLE IF NOT EXISTS categorias(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE usuarios_livros (
+    usuario_id INT,
+    livro_id INT,
+    PRIMARY KEY (usuario_id, livro_id),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+    FOREIGN KEY (livro_id) REFERENCES livros(id)
+);
