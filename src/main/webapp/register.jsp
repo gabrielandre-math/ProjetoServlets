@@ -29,7 +29,7 @@
                     <h4 class="text-center mb-4">Registrar</h4>
 
                     <c:if test="${not empty sucessMsg}">
-                        <p class="text-center text-sucess">${sucessMsg}</p>
+                        <p class="text-center text-success">${sucessMsg}</p>
                         <c:remove var="sucessMsg" scope="session"/>
                     </c:if>
                     <c:if test="${not empty failRegister}">

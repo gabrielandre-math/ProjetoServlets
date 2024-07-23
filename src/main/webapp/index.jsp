@@ -86,13 +86,13 @@
                     %>
                     <div class="btn-group d-flex justify-content-center mt-4">
                         <a href="" class="btn btn-danger btn-sm diagonal-button">Adicionar ao Carrinho</a>
-                        <a href="" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
+                        <a href="view_books.jsp?bid=<%=livro.getId()%>" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
                     </div>
                     <%
                         }else{
                     %>
                     <div class="btn-group d-flex justify-content-center mt-4">
-                        <a href="" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
+                        <a href="view_books.jsp?bid=<%=livro.getId()%>" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
                     </div>
                     <%
                         }
@@ -125,7 +125,7 @@
                                 <p>Categoria: <%=livro.getCategoria().getNome()%></p>
                                 <div class="btn-group d-flex justify-content-center mt-4">
                                     <a href="" class="btn btn-danger btn-sm diagonal-button">Adicionar ao Carrinho</a>
-                                    <a href="" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
+                                    <a href="view_books.jsp?bid=<%=livro.getId()%>" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +155,7 @@
                     <p><%=livro.getNome()%></p>
                     <p>Categoria: <%=livro.getCategoria().getNome()%></p>
                     <div class="btn-group d-flex justify-content-center mt-4">
-                        <a href="" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
+                        <a href="view_books.jsp?bid=<%=livro.getId()%>" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
                     </div>
                 </div>
             </div>

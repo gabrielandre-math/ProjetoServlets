@@ -74,7 +74,7 @@
         <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 el">
             <div class="card diagonal-books card-bg">
                 <div class="card-body text-center">
-                    <img src="books/<%=livro.getImagem()%>" alt="<%=livro.getImagem()%>" style="width: 150px; height: 200px;" class="img-thumblin">
+                    <img src="books/<%=livro.getImagem()%>" alt="<%=livro.getImagem()%>" style="width: 100px; height: 150px;" class="img-thumblin">
                     <p><%=livro.getNome()%></p>
                     <p>Categoria: <%=livro.getCategoria().getNome()%></p>
                     <div class="btn-group d-flex justify-content-center mt-4">
