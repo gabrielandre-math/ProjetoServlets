@@ -130,6 +130,24 @@
                             </select>
                         </div>
                         <div class="form-group mb-3">
+                            <label for="novoVelho">Estado</label>
+                            <select id="novoVelho" name="novoVelho" class="form-select" required>
+                                <option value="" disabled selected>Selecione</option>
+                                <!-- As opções de categoria -->
+                                <option value="Novo">Livro Novo</option>
+                                <option value="Velho">Livro Velho</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="status">Status</label>
+                            <select id="status" name="status" class="form-select" required>
+                                <option value="" disabled selected>Selecione</option>
+                                <!-- As opções de categoria -->
+                                <option value="Ativo">Ativo</option>
+                                <option value="Inativo">Inativo</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
                             <label for="qtdLivro">Quantidade</label>
                             <input name="qtdLivro" type="number" class="form-control" id="qtdLivro" placeholder="Digite a quantidade" min="1" required>
                         </div>

@@ -21,11 +21,15 @@ public class EditarLivros extends HttpServlet {
             Long id = Long.parseLong(request.getParameter("id"));
             String nomeLivro = request.getParameter("nomeLivro");
             String ISBN = request.getParameter("isbnLivro");
+            String status = request.getParameter("status");
+            String novoVelho = request.getParameter("novoVelho");
             int quantidade = Integer.parseInt(request.getParameter("qtdLivro"));
 
             livro.setId(id);
             livro.setNome(nomeLivro);
             livro.setIsbn(ISBN);
+            livro.setNovoVelho(novoVelho);
+            livro.setStatus(status);
             livro.setQuantidade(quantidade);
 
             boolean verificar = livroDAO.update(livro);

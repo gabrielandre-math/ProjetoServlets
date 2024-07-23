@@ -1,29 +1,42 @@
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%
-    // Verifica se a sessão já existe
-    HttpSession currentSession = request.getSession(false);
+    try {
+        // Verifica se a sessão já existe
+        HttpSession currentSession = request.getSession(false);
+        System.out.println("Sessão atual: " + currentSession);
 
-    // Se a sessão não existir, cria uma nova e define 'loggedIn' como false
-    if (currentSession == null) {
-        currentSession = request.getSession(true);
-        currentSession.setAttribute("loggedIn", false);
+        // Se a sessão não existir, cria uma nova e define 'loggedIn' como false
+        if (currentSession == null) {
+            currentSession = request.getSession(true);
+            currentSession.setAttribute("loggedIn", false);
+            System.out.println("Nova sessao criada. loggedIn definido como false");
+        }
+
+        // Obtém o valor do atributo 'loggedIn'
+        Boolean loggedIn = (Boolean) currentSession.getAttribute("loggedIn");
+        System.out.println("Valor de loggedIn: " + loggedIn);
+
+        // Se 'loggedIn' for nulo, define como false
+        if (loggedIn == null) {
+            loggedIn = false;
+            currentSession.setAttribute("loggedIn", loggedIn);
+            System.out.println("loggedIn era nulo. Definido como false");
+        }
+
+        // Define o atributo 'loggedIn' na requisição
+        request.setAttribute("loggedIn", loggedIn);
+        System.out.println("loggedIn definido na requisição: " + loggedIn);
+    } catch (Exception e) {
+        e.printStackTrace();
     }
-
-    // Obtém o valor do atributo 'loggedIn'
-    Boolean loggedIn = (Boolean) currentSession.getAttribute("loggedIn");
-
-    // Se 'loggedIn' for nulo, define como false
-    if (loggedIn == null) {
-        loggedIn = false;
-        currentSession.setAttribute("loggedIn", loggedIn);
-    }
-
-    // Define o atributo 'loggedIn' na requisição
-    request.setAttribute("loggedIn", loggedIn);
 %>
 <%
-    // Para fins de depuração. Utilizei para monitorar o comportamento da sessão
-    System.out.println("LoggedIn: " + session.getAttribute("loggedIn"));
+    try {
+        // Para fins de depuração. Utilizei para monitorar o comportamento da sessão
+        System.out.println("LoggedIn: " + session.getAttribute("loggedIn"));
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
 %>
 
 <!DOCTYPE html>
@@ -141,7 +154,7 @@
 <!-- Navbar 2 -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-custom mt-3 sticky-top diagonal-2" id="navbar2">
     <div class="container-fluid d-flex align-items-center">
-        <a class="navbar-brand font-style hidden ms-2" id="secondary-logo" href="#">
+        <a class="navbar-brand font-style hidden ms-2" id="secondary-logo" href="../index.jsp">
             ServletBook <i class="bi bi-layers-fill"></i>
         </a>
         <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -153,16 +166,16 @@
                     <div></div>
                 </li>
                 <li class="nav-item content">
-                    <a class="nav-link active" aria-current="page" href="#"><i class="fas fa-home icon"></i>Inicio</a>
+                    <a class="nav-link active" aria-current="page" href="../index.jsp"><i class="fas fa-home icon"></i>Inicio</a>
                 </li>
                 <li class="nav-item content">
-                    <a class="nav-link" href="#"><i class="fas fa-book icon"></i>Livros recentes</a>
+                    <a class="nav-link" href="../all_recent_books.jsp"><i class="fas fa-book icon"></i>Livros recentes</a>
                 </li>
                 <li class="nav-item content">
-                    <a class="nav-link" href="#"><i class="fas fa-book icon"></i>Livros antigos</a>
+                    <a class="nav-link" href="../all_new_books.jsp"><i class="fas fa-book icon"></i>Livros novos</a>
                 </li>
                 <li class="nav-item content">
-                    <a class="nav-link" href="#"><i class="fas fa-add icon"></i>Novo livro</a>
+                    <a class="nav-link" href="../all_old_books.jsp"><i class="fas fa-book icon"></i>Livros antigos</a>
                 </li>
             </ul>
         </div>

@@ -41,8 +41,7 @@
     </style>
 </head>
 <body>
-<%@include file="navbar-adm.jsp" %>
-<h3 class="text-center">Bem-vindo Admin!</h3>
+<%@include file="/all_Component/navbar.jsp" %>
 
 <c:if test="${not empty sucessMsg}">
     <h5 class="text-center text-sucess">${sucessMsg}</h5>

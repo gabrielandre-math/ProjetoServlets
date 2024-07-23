@@ -18,7 +18,7 @@ import java.sql.Connection;
 public class LoginServlet extends HttpServlet {
     private UsuarioDAOImpl usuarioDAOImpl;
     UserAuthenticate authenticate;
-    Boolean loggedIn = false;
+
     public void init() throws ServletException {
         super.init();
         usuarioDAOImpl = new UsuarioDAOImpl();
@@ -30,11 +30,9 @@ public class LoginServlet extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
 
-            // Obter a conexão com o banco de dados
             Connection connection = DBConnection.getConnection();
             usuarioDAOImpl.setConnection(connection);
 
-            // Verificar se o usuário existe no banco de dados
             Usuarios usuario = usuarioDAOImpl.findByEmail(email);
 
             if (usuario != null && usuario.getSenha().equals(password)) {
@@ -42,11 +40,11 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("loggedIn", true);
                 session.setAttribute("usuario", usuario);
 
-                // Verificar se o usuário é administrador
                 if (usuario.isAdmin()) {
                     session.setAttribute("userRole", "admin");
                     response.sendRedirect("admin/home-admin.jsp");
                 } else {
+                    session.setAttribute("userRole", "user");
                     response.sendRedirect("home.jsp");
                 }
             } else {
