@@ -44,7 +44,7 @@
 <%@include file="/all_Component/navbar.jsp" %>
 
 <c:if test="${not empty sucessMsg}">
-    <h5 class="text-center text-sucess">${sucessMsg}</h5>
+    <h5 class="text-center text-success">${sucessMsg}</h5>
     <c:remove var="sucessMsg" scope="session"/>
 </c:if>
 

@@ -47,7 +47,8 @@ public class FiltroAutorizacao implements Filter {
         return requestURI.contains("/index.jsp") || requestURI.contains("/login.jsp") ||
                 requestURI.contains("/register.jsp") || requestURI.contains("/login") ||
                 requestURI.contains("/register") || requestURI.contains("/all_new_books.jsp") ||
-                requestURI.contains("/all_recent_books.jsp") || requestURI.contains("/all_old_books.jsp");
+                requestURI.contains("/all_recent_books.jsp") || requestURI.contains("/all_old_books.jsp") ||
+                requestURI.contains("/view_books.jsp");
     }
 
     private boolean isUserPageAllowed(String requestURI) {

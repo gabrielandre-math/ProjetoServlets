@@ -51,8 +51,8 @@ public class AdicionarLivros extends HttpServlet {
 
             boolean verificar = livroDAO.save(livro);
             if (verificar) {
-                String path = getServletContext().getRealPath("/books");
-                System.out.println(path);
+                String path = "C:\\Users\\luucc\\OneDrive\\Documentos\\GitHub\\ProjetoServlets\\src\\main\\webapp\\books";
+                //String path = getServletContext().getRealPath("/books"); Caso precise que não salve as imagens no projeto. Precisa de uma tabela imagem.
                 File file = new File(path);
                 //Verifica se a pasta /books existe
                 if (!file.exists()) {

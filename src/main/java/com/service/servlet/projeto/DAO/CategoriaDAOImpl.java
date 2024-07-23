@@ -64,10 +64,11 @@ public class CategoriaDAOImpl extends GenericDAO<Categorias> {
             stmt.setString(1, categoria.getNome());
             stmt.setLong(2, categoria.getId());
             stmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     @Override
@@ -76,9 +77,10 @@ public class CategoriaDAOImpl extends GenericDAO<Categorias> {
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
             stmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 }

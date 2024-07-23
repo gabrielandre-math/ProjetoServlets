@@ -19,7 +19,7 @@ public class EditarCategoria extends HttpServlet {
 
         try {
             Long id = Long.parseLong(request.getParameter("id"));
-            String nome = request.getParameter("nome");
+            String nome = request.getParameter("nomeCat");
 
             categoria.setId(id);
 

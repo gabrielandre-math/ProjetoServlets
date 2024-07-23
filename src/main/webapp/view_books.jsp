@@ -1,16 +1,15 @@
+<%@ page import="com.service.servlet.projeto.DB.DBConnection" %>
+<%@ page import="java.sql.Connection" %>
 <%@ page import="com.service.servlet.projeto.DAO.LivroDAOImpl" %>
 <%@ page import="com.service.servlet.projeto.Model.Livros" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: luucc
-  Date: 22/07/2024
-  Time: 22:16
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Todos: Livros recentes</title>
+    <meta charset="UTF-8">
+    <title>Biblioteca Servlet</title>
+
     <%@include file="all_Component/allCss.jsp" %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.css"/>
@@ -64,31 +63,78 @@
     }
 </style>
 
+    <%
+       Long id = Long.parseLong(request.getParameter("bid"));
+       LivroDAOImpl livroDAO = new LivroDAOImpl();
+       Livros livro = livroDAO.findById(id);
+    %>
+
 <div class="container mt-4">
     <div class="row basic-staggering-demo">
+        <div class="col-md-6 text-center p-5 border bg-white">
+            <img src="books/<%=livro.getImagem()%>" style="height: 150px; width: 100px" class="img-fluid"><br/>
+            <h4 class="mt-3">Nome do livro: <span class="text-success"><%=livro.getNome()%></span></h4>
+            <h4>Categoria: <span class="text-success"><%=livro.getCategoria().getNome()%></span></h4>
+            <h4>Estado: <span class="text-success"><%=livro.getNovoVelho()%></span></h4>
             <%
-                LivroDAOImpl livroDAO = new LivroDAOImpl();
-                List<Livros> livros = livroDAO.getAllOldBooks();
-                for (Livros livro : livros) {
-            %>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 el">
-                <div class="card diagonal-books card-bg">
-                    <div class="card-body text-center">
-                        <img src="books/<%=livro.getImagem()%>" alt="<%=livro.getImagem()%>" style="width: 100px; height: 150px;" class="img-thumblin">
-                        <p><%=livro.getNome()%></p>
-                        <p>Categoria: <%=livro.getCategoria().getNome()%></p>
-                        <div class="btn-group d-flex justify-content-center mt-4">
-                            <a href="" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                if("Velho".equalsIgnoreCase(livro.getNovoVelho()))
+                {%>
+            <h4 class="text-danger">Indisponível no momento!</h4>
             <%
                 }
             %>
         </div>
+
+        <div class="col-md-6 text-center p-5 border bg-white">
+            <h2><%=livro.getNome()%></h2>
+
+            <%
+            if("Velho".equalsIgnoreCase(livro.getNovoVelho()))
+            {%>
+            <div class="row basic-staggering-demo">
+                <div class="col-md-4 text-danger text-center p-2">
+                    <i class="fa-regular fa-star fa-2x"></i>
+                    <p>Avaliações</p>
+                </div>
+                <div class="col-md-4 text-danger text-center p-2">
+                    <i class="fa-regular fa-hand fa-2x"></i>
+                    <p>Empréstimos</p>
+                </div>
+                <div class="col-md-4 text-danger text-center p-2">
+                    <i class="fa-solid fa-book fa-2x"></i>
+                    <p>Qualidade</p>
+                </div>
+
+                <div class="row basic-staggering-demo text-center p-3">
+                    <a href="index.jsp" class="btn btn-primary">Ver outros livros</a>
+                </div>
+            </div>
+            <%
+                }else{
+            %>
+
+            <div class="row basic-staggering-demo">
+                <div class="col-md-4 text-danger text-center p-2">
+                    <i class="fa-regular fa-star fa-2x"></i>
+                    <p>Avaliações</p>
+                </div>
+                <div class="col-md-4 text-danger text-center p-2">
+                    <i class="fa-regular fa-hand fa-2x"></i>
+                    <p>Empréstimos</p>
+                </div>
+                <div class="col-md-4 text-danger text-center p-2">
+                    <i class="fa-solid fa-book fa-2x"></i>
+                    <p>Qualidade</p>
+                </div>
+            </div>
+            <div class="row basic-staggering-demo text-center p-3">
+                <a href="" class="btn btn-primary">Adicionar ao Carrinho</a>
+            </div>
+            <%
+                }
+            %>
+    </div>
 </div>
-<hr>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
