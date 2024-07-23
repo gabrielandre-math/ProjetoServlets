@@ -108,7 +108,42 @@
                             <input name="isbnLivro" type="text" class="form-control"
                                    id="exampleInputBookISBN" value="<%=livro.getIsbn()%>">
                         </div>
-
+                        <div class="form-group mb-3">
+                            <label for="novoVelho">Estado</label>
+                            <select id="novoVelho" name="novoVelho" class="form-select" required>
+                                <%
+                                    if("Velho".equalsIgnoreCase(livro.getNovoVelho())){
+                                %>
+                                <option value="Novo">Livro Novo</option>
+                                <option value="Velho">Livro Velho</option>
+                                <%
+                                }else{
+                                %>
+                                <option value="Velho">Livro Velho</option>
+                                <option value="Novo">Livro Novo</option>
+                                <%
+                                    }
+                                %>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputState">Status</label>
+                            <select id="inputState" name="status" class="form-control">
+                                <%
+                                    if("Ativo".equals(livro.getStatus())){
+                                %>
+                                <option value="Ativo">Ativo</option>
+                                <option value="Inativo">Inativo</option>
+                                <%
+                                }else{
+                                %>
+                                <option value="Inativo">Inativo</option>
+                                <option value="Ativo">Ativo</option>
+                                <%
+                                }
+                                %>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="exampleInputBookQuantity">Quantidade</label>
                             <input name="qtdLivro" type="text" class="form-control"

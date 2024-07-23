@@ -39,7 +39,7 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <i class="fas fa-plus-square text-primary"></i><br/>
-                        <h4>Adicionar Livro</h4>
+                        <h4>Pegar livro emprestado</h4>
                     </div>
                 </div>
             </a>
@@ -51,28 +51,6 @@
                     <div class="card-body text-center">
                         <i class="fas fa-book-open text-warning"></i><br/>
                         <h4>Meus Livros</h4>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
-            <a href="orders_user.jsp">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-box-open text-warning"></i><br/>
-                        <h4>Pedidos</h4>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
-            <a href="all_categories_user.jsp">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <i class="fa-solid fa-list text-primary"></i><br/>
-                        <h4>Categorias</h4>
                     </div>
                 </div>
             </a>

@@ -1,10 +1,6 @@
 package com.service.servlet.projeto.Service;
 
-import jakarta.servlet.Filter;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
+import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -14,6 +10,11 @@ import java.io.IOException;
 public class FiltroAutorizacao implements Filter {
 
     @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        // Inicialização do filtro, se necessário
+    }
+
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
@@ -21,29 +22,38 @@ public class FiltroAutorizacao implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession session = httpRequest.getSession(false);
 
-        // Obtém o papel do usuário da sessão
         String role = (session != null) ? (String) session.getAttribute("userRole") : null;
 
-        // URL solicitada
         String requestURI = httpRequest.getRequestURI();
 
         // Verifica se o usuário é administrador ou se está acessando páginas permitidas
-        if (role != null && role.equals("admin")) {
-            chain.doFilter(request, response); // Admin tem acesso total
-        } else if (isUserPageAllowed(requestURI, role)) {
-            chain.doFilter(request, response); // Páginas permitidas para usuários comuns
+        if (isPublicPage(requestURI)) {
+            chain.doFilter(request, response);
+        } else if (role != null && role.equals("admin")) {
+            chain.doFilter(request, response);
+        } else if (role != null && role.equals("user") && isUserPageAllowed(requestURI)) {
+            chain.doFilter(request, response);
         } else {
-            httpResponse.sendError(HttpServletResponse.SC_NOT_FOUND); // Retorna erro 404
+            httpResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
-    // Verifica se a página solicitada é permitida para usuários comuns
-    private boolean isUserPageAllowed(String requestURI, String role) {
+    @Override
+    public void destroy() {
+        // Destruição do filtro, se necessário
+    }
+
+    private boolean isPublicPage(String requestURI) {
+        return requestURI.contains("/index.jsp") || requestURI.contains("/login.jsp") ||
+                requestURI.contains("/register.jsp") || requestURI.contains("/login") ||
+                requestURI.contains("/register") || requestURI.contains("/all_new_books.jsp") ||
+                requestURI.contains("/all_recent_books.jsp") || requestURI.contains("/all_old_books.jsp");
+    }
+
+    private boolean isUserPageAllowed(String requestURI) {
         // Lista de URLs permitidas para usuários comuns
-        return requestURI.contains("/home.jsp") || requestURI.contains("/index.jsp") ||
-                requestURI.contains("/my_books_user.jsp") || requestURI.contains("/orders_user.jsp") ||
-                requestURI.contains("/logout.jsp") || requestURI.contains("/add_books_user.jsp") ||
-                requestURI.contains("/login.jsp") || requestURI.contains("/register.jsp") ||
-                requestURI.contains("/login") || requestURI.contains("/register") || requestURI.contains("/logout");
+        return requestURI.contains("/home.jsp") || requestURI.contains("/my_books_user.jsp") ||
+                requestURI.contains("/orders_user.jsp") || requestURI.contains("/logout.jsp") ||
+                requestURI.contains("/add_books_user.jsp");
     }
 }

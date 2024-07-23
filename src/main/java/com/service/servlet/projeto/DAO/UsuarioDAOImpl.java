@@ -96,13 +96,12 @@ public class UsuarioDAOImpl extends GenericDAO<Usuarios> {
 
     @Override
     public boolean update(Usuarios usuario) {
-        String sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, isAdmin = ? WHERE id = ?";
+        String sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());
             stmt.setString(3, usuario.getSenha());
-            stmt.setBoolean(4, usuario.isAdmin());
-            stmt.setLong(5, usuario.getId());
+            stmt.setLong(4, usuario.getId());
             stmt.executeUpdate();
             return true;
         } catch (SQLException e) {

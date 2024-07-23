@@ -26,6 +26,8 @@ public class AdicionarLivros extends HttpServlet {
             String nomeLivro = request.getParameter("nomeLivro");
             String ISBN = request.getParameter("isbnLivro");
             String cat = request.getParameter("categoriaLivro");
+            String novoVelho = request.getParameter("novoVelho");
+            String status = request.getParameter("status");
             int quantidade = Integer.parseInt(request.getParameter("qtdLivro"));
             Part part = request.getPart("imagemLivro");
             String fileName = part.getSubmittedFileName();
@@ -42,12 +44,15 @@ public class AdicionarLivros extends HttpServlet {
             livro.setImagem(fileName);
             livro.setCategoria(categoria);
             livro.setNome(nomeLivro);
+            livro.setStatus(status);
             livro.setIsbn(ISBN);
+            livro.setNovoVelho(novoVelho);
             livro.setQuantidade(quantidade);
 
             boolean verificar = livroDAO.save(livro);
             if (verificar) {
                 String path = getServletContext().getRealPath("/books");
+                System.out.println(path);
                 File file = new File(path);
                 //Verifica se a pasta /books existe
                 if (!file.exists()) {

@@ -4,12 +4,11 @@
          version="3.1">
     <!-- Configurações do Servlet e JSP -->
     <filter>
-        <filter-name>FiltroAutorizacao</filter-name>
+        <filter-name>AuthorizationFilter</filter-name>
         <filter-class>com.service.servlet.projeto.Service.FiltroAutorizacao</filter-class>
     </filter>
-
     <filter-mapping>
-        <filter-name>FiltroAutorizacao</filter-name>
+        <filter-name>AuthorizationFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
