@@ -1,4 +1,4 @@
-package com.service.servlet.projeto.Model;
+package com.service.servlet.projeto.DB.Model;
 
 import java.util.List;
 
