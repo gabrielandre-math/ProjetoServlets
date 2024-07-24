@@ -1,5 +1,6 @@
-package com.service.servlet.projeto.AdmController;
+package com.service.servlet.projeto.MainController.AdmController;
 
+import com.service.servlet.projeto.Database.Connection.DBConnection;
 import com.service.servlet.projeto.Database.DAO.CategoriaDAOImpl;
 import com.service.servlet.projeto.Database.DAO.LivroDAOImpl;
 import com.service.servlet.projeto.Database.Model.Categorias;
@@ -21,6 +22,7 @@ public class AdicionarLivros extends HttpServlet {
         CategoriaDAOImpl categoriaDAO = new CategoriaDAOImpl();
         Livros livro = new Livros();
         LivroDAOImpl livroDAO = new LivroDAOImpl();
+        DBConnection.getConnection();
 
         try {
             String nomeLivro = request.getParameter("nomeLivro");

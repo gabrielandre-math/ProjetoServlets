@@ -127,9 +127,21 @@
                     <p>Qualidade</p>
                 </div>
             </div>
-            <div class="row basic-staggering-demo text-center p-3">
-                <a href="" class="btn btn-primary">Pegar emprestado</a>
-            </div>
+            <%
+                if (Boolean.FALSE.equals(session.getAttribute("loggedIn"))){
+            %>
+                <div class="row basic-staggering-demo text-center p-3">
+                    <a href="index.jsp" class="btn btn-primary">Ver outros livros</a>
+                </div>
+                <%
+                    }else{
+                %>
+                <div class="row basic-staggering-demo text-center p-3">
+                    <a href="" class="btn btn-primary">Pegar emprestado</a>
+                </div>
+                <%
+                    }
+                %>
             <%
                 }
             %>

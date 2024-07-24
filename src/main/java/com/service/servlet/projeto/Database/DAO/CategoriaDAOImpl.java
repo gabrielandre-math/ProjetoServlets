@@ -83,4 +83,19 @@ public class CategoriaDAOImpl extends GenericDAO<Categorias> {
             return false;
         }
     }
+
+    public boolean isCategoriaVinculada(Long categoriaId) {
+        String query = "SELECT COUNT(*) FROM livros WHERE categoria_id = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setLong(1, categoriaId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

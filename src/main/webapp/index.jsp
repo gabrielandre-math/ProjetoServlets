@@ -84,10 +84,22 @@
                     <%
                         if("Novo".equalsIgnoreCase(livro.getNovoVelho())){
                     %>
-                    <div class="btn-group d-flex justify-content-center mt-4">
-                        <a href="add_books_user.jsp?bid=<%=livro.getId()%>?user=<%=session.getAttribute("usuario")%>" class="btn btn-danger btn-sm diagonal-button">Pegar emprestado</a>
-                        <a href="view_books.jsp?bid=<%=livro.getId()%>" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
-                    </div>
+                        <%
+                            if (Boolean.FALSE.equals(session.getAttribute("loggedIn"))){
+                        %>
+                            <div class="btn-group d-flex justify-content-center mt-4">
+                                <a href="view_books.jsp?bid=<%=livro.getId()%>" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
+                            </div>
+                        <%
+                            }else{
+                        %>
+                            <div class="btn-group d-flex justify-content-center mt-4">
+                                <a href="add_books_user.jsp?bid=<%=livro.getId()%>" class="btn btn-danger btn-sm diagonal-button">Pegar emprestado</a>
+                                <a href="view_books.jsp?bid=<%=livro.getId()%>" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
+                            </div>
+                        <%
+                            }
+                        %>
                     <%
                         }else{
                     %>
@@ -124,8 +136,18 @@
                                 <p><%=livro.getNome()%></p>
                                 <p>Categoria: <%=livro.getCategoria().getNome()%></p>
                                 <div class="btn-group d-flex justify-content-center mt-4">
+                                    <%
+                                        if (Boolean.FALSE.equals(session.getAttribute("loggedIn"))){
+                                    %>
+                                        <a href="view_books.jsp?bid=<%=livro.getId()%>" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
+                                    <%
+                                        }else{
+                                    %>
                                     <a href="add_books_user.jsp?bid=<%=livro.getId()%>" class="btn btn-danger btn-sm diagonal-button">Pegar emprestado</a>
                                     <a href="view_books.jsp?bid=<%=livro.getId()%>" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
+                                    <%
+                                        }
+                                    %>
                                 </div>
                             </div>
                         </div>

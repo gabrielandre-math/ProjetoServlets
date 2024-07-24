@@ -90,9 +90,17 @@
                     </c:choose>
                 </td>
                 <td>
+                    <%
+                        if (usuario.isAdmin()) {%>
 
+                    <%
+                        }else{
+                    %>
                     <a href="edit_users.jsp?id=<%=usuario.getId()%>" class="btn btn-sm btn-primary">Editar</a>
                     <a href="../delete-user?id=<%=usuario.getId()%>" class="btn btn-sm btn-danger">Excluir</a>
+                    <%
+                        }
+                    %>
                 </td>
             </tr>
             <%

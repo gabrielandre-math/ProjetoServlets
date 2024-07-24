@@ -60,6 +60,7 @@
                         </div>
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn bg-custom">Enviar</button>
+                            <a href="login.jsp" class="btn btn-link">Fazer Login</a>
                         </div>
                     </form>
                 </div>

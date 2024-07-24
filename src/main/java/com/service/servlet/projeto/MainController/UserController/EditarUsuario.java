@@ -1,4 +1,4 @@
-package com.service.servlet.projeto.AdmController;
+package com.service.servlet.projeto.MainController.UserController;
 
 import com.service.servlet.projeto.Database.DAO.UsuarioDAOImpl;
 import com.service.servlet.projeto.Database.Model.Usuarios;
@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet("/edituser")
-public class EditarUsuarios extends HttpServlet {
+@WebServlet("/editusersingle")
+public class EditarUsuario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UsuarioDAOImpl userDAO = new UsuarioDAOImpl();
         Usuarios usuario = new Usuarios();
@@ -23,8 +23,9 @@ public class EditarUsuarios extends HttpServlet {
             String email = request.getParameter("email");
             String senha = request.getParameter("password");
 
-            usuario.setId(id);
+            HttpSession session = request.getSession();
 
+            usuario.setId(id);
             usuario.setNome(nome);
             usuario.setEmail(email);
             usuario.setSenha(senha);
@@ -32,19 +33,20 @@ public class EditarUsuarios extends HttpServlet {
 
             boolean verificar = userDAO.update(usuario);
 
-            HttpSession session = request.getSession();
-
             if (verificar) {
                 session.setAttribute("sucessMsg", "Usuário atualizado com sucesso!");
-                response.sendRedirect("admin/all_users.jsp");
+                response.sendRedirect("edit_user.jsp");
             } else {
                 session.setAttribute("failMsg", "Ocorreu um erro ao tentar atualizar o usuário...");
-                response.sendRedirect("admin/all_users.jsp");
+                response.sendRedirect("edit_user.jsp");
             }
 
 
         } catch (Exception e) {
             e.printStackTrace();
+            HttpSession session = request.getSession();
+            session.setAttribute("failMsg", "Erro ao processar a atualização do usuário.");
+            response.sendRedirect("edit_user.jsp");
         }
     }
 }

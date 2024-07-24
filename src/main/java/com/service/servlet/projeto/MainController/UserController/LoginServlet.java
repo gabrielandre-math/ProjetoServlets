@@ -1,4 +1,4 @@
-package com.service.servlet.projeto.Controller;
+package com.service.servlet.projeto.MainController.UserController;
 
 import com.service.servlet.projeto.Database.DAO.UsuarioDAOImpl;
 import com.service.servlet.projeto.Database.Connection.DBConnection;
@@ -17,28 +17,29 @@ import java.sql.Connection;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
     private UsuarioDAOImpl usuarioDAOImpl;
-    UserAuthenticate authenticate;
 
     public void init() throws ServletException {
         super.init();
         usuarioDAOImpl = new UsuarioDAOImpl();
-        authenticate = new UserAuthenticate();
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Connection connection = null;
         try {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
 
-            Connection connection = DBConnection.getConnection();
+            connection = DBConnection.getConnection();
             usuarioDAOImpl.setConnection(connection);
 
             Usuarios usuario = usuarioDAOImpl.findByEmail(email);
 
+            HttpSession session = request.getSession();
+
             if (usuario != null && usuario.getSenha().equals(password)) {
-                HttpSession session = request.getSession();
                 session.setAttribute("loggedIn", true);
                 session.setAttribute("usuario", usuario);
+                session.setAttribute("userId", usuario.getId());
 
                 if (usuario.isAdmin()) {
                     session.setAttribute("userRole", "admin");
@@ -48,7 +49,6 @@ public class LoginServlet extends HttpServlet {
                     response.sendRedirect("home.jsp");
                 }
             } else {
-                HttpSession session = request.getSession();
                 session.setAttribute("loginFail", "Email ou Senha incorretos...");
                 session.setAttribute("loggedIn", false);
                 response.sendRedirect("login.jsp");
@@ -56,6 +56,8 @@ public class LoginServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
+            HttpSession session = request.getSession();
+            session.setAttribute("loginFail", "Ocorreu um erro. Por favor, tente novamente.");
             response.sendRedirect("login.jsp");
         }
     }
