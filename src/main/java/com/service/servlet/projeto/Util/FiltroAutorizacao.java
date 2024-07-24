@@ -55,6 +55,7 @@ public class FiltroAutorizacao implements Filter {
         // Lista de URLs permitidas para usuários comuns
         return requestURI.contains("/home.jsp") || requestURI.contains("/my_books_user.jsp") ||
                 requestURI.contains("/orders_user.jsp") || requestURI.contains("/logout.jsp") ||
-                requestURI.contains("/add_books_user.jsp");
+                requestURI.contains("/add_books_user.jsp") || requestURI.contains("/edit_user.jsp") ||
+                requestURI.contains("/edituser");
     }
 }

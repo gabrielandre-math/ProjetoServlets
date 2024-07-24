@@ -82,7 +82,7 @@
         <div class="col-12 col-md-8 col-lg-6">
             <div class="card fade-in" id="form-card">
                 <div class="card-body">
-                    <h4 class="text-center title">Adicionar Livros</h4>
+                    <h4 class="text-center title">Pegar livro emprestado</h4>
                     <c:if test="${not empty sucessMsg}">
                         <div class="alert alert-success text-center">
                                 ${sucessMsg}
@@ -117,7 +117,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="qtdLivro">Quantidade</label>
-                            <input name="qtdLivro" type="number" class="form-control" id="qtdLivro" value="1" min="1" required>
+                            <input name="qtdLivro" type="number" class="form-control" id="qtdLivro" value="1" max="1" readonly required>
                         </div>
                         <button type="submit" class="btn bg-custom text-white w-100 d-block">Adicionar Livro</button>
                     </form>
@@ -127,6 +127,12 @@
                             setTimeout(function() {
                                 document.getElementById('form-card').classList.add('visible');
                             }, 200);
+                        });
+                    </script>
+                    <script>
+                        document.getElementById('qtdLivro').value = 1;
+                        document.getElementById('qtdLivro').addEventListener('input', function() {
+                            this.value = 1;
                         });
                     </script>
                 </div>

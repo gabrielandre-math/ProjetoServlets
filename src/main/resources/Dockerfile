@@ -9,7 +9,7 @@ ENV POSTGRES_PASSWORD=password
 # Copie o script de inicialização e o arquivo CSV para o contêiner
 COPY init-db.sh /docker-entrypoint-initdb.d/
 COPY livros.csv /docker-entrypoint-initdb.d/
-COPY categorias.CSV /docker-entrypoint-initdb.d/
+COPY categorias.csv /docker-entrypoint-initdb.d/
 
 # Permitir execução do script
 RUN chmod +x /docker-entrypoint-initdb.d/init-db.sh

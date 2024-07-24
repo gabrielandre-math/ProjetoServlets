@@ -1,13 +1,13 @@
-<%@ page import="com.service.servlet.projeto.Database.DAO.LivroDAOImpl" %>
-<%@ page import="com.service.servlet.projeto.Database.Model.Livros" %>
+<%@ page import="com.service.servlet.projeto.Database.DAO.UsuarioDAOImpl" %>
+<%@ page import="com.service.servlet.projeto.Database.Model.Usuarios" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <title>Adm: Editar Livro</title>
-    <%@include file="allCss.jsp"%>
+    <title>Adm: Editar Usuário</title>
+    <%@include file="/all_Component/allCss.jsp"%>
     <style>
         body {
             background-color: #f7f7f7;
@@ -71,6 +71,9 @@
         .bg-custom {
             background-color: #6E49D7;
         }
+        .container-spacing {
+            margin-bottom: 40px;
+        }
     </style>
 </head>
 <body>
@@ -80,45 +83,33 @@
         <div class="col-12 col-md-8 col-lg-6">
             <div class="card fade-in" id="form-card">
                 <div class="card-body">
-                    <h4 class="text-center title">Editar Livro</h4>
-
+                    <h4 class="text-center title">Editar Usuário</h4>
+                    <c:if test="${not empty loginFail}">
+                        <h5 class="text-center text-danger">${loginFail}</h5>
+                        <c:remove var="loginFail" scope="session"/>
+                    </c:if>
+                    <c:if test="${not empty sucessMsg}">
+                        <h5 class="text-center text-success">${sucessMsg}</h5>
+                        <c:remove var="loginFail" scope="session"/>
+                    </c:if>
                     <%
-                        Long id = Long.parseLong(request.getParameter("id"));
-                        LivroDAOImpl livroDAO = new LivroDAOImpl();
-                        Livros livro = livroDAO.findById(id);
+                        Long id = (session != null) ? (Long) session.getAttribute("userId") : null;
+                        UsuarioDAOImpl usuarioDAO = new UsuarioDAOImpl();
+                        Usuarios usuario = usuarioDAO.findById(id);
                     %>
-
-                    <form action="../editbooks" method="post">
-                        <input type="hidden" name="id" value="<%=livro.getId()%>">
-
+                    <form action="../editusersingle" method="post">
+                        <input type="hidden" name="id" value="<%=id%>">
                         <div class="form-group mb-3">
-                            <label for="exampleInputBookName">Nome do Livro</label>
-                            <input name="nomeLivro" type="text" class="form-control"
-                                   id="exampleInputBookName" value="<%=livro.getNome()%>" required>
+                            <label for="nomeUsuario">Nome do Usuário</label>
+                            <input name="nome" type="text" class="form-control" id="nomeUsuario" value="<%=usuario.getNome()%>" required>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="exampleInputBookISBN">ISBN</label>
-                            <input name="isbnLivro" type="text" class="form-control"
-                                   id="exampleInputBookISBN" value="<%=livro.getIsbn()%>" required>
+                            <label for="emailUsuario">Email</label>
+                            <input name="email" type="email" class="form-control" id="emailUsuario" value="<%=usuario.getEmail()%>" required>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="novoVelho">Estado</label>
-                            <select id="novoVelho" name="novoVelho" class="form-select" required>
-                                <option value="Novo" <%= "Novo".equalsIgnoreCase(livro.getNovoVelho()) ? "selected" : "" %>>Livro Novo</option>
-                                <option value="Velho" <%= "Velho".equalsIgnoreCase(livro.getNovoVelho()) ? "selected" : "" %>>Livro Velho</option>
-                            </select>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="inputState">Status</label>
-                            <select id="inputState" name="status" class="form-control" required>
-                                <option value="Ativo" <%= "Ativo".equals(livro.getStatus()) ? "selected" : "" %>>Ativo</option>
-                                <option value="Inativo" <%= "Inativo".equals(livro.getStatus()) ? "selected" : "" %>>Inativo</option>
-                            </select>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="exampleInputBookQuantity">Quantidade</label>
-                            <input name="qtdLivro" type="number" class="form-control"
-                                   id="exampleInputBookQuantity" value="<%=livro.getQuantidade()%>" required>
+                            <label for="senhaUsuario">Senha</label>
+                            <input name="password" type="password" class="form-control" id="senhaUsuario" value="<%=usuario.getSenha()%>" required>
                         </div>
                         <button type="submit" class="btn bg-custom text-white w-100 d-block">Atualizar</button>
                     </form>

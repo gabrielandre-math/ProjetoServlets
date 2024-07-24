@@ -1,4 +1,4 @@
-package com.service.servlet.projeto.AdmController;
+package com.service.servlet.projeto.MainController.AdmController;
 
 import com.service.servlet.projeto.Database.DAO.CategoriaDAOImpl;
 import com.service.servlet.projeto.Database.Model.Categorias;
@@ -20,22 +20,33 @@ public class DeletarCategoria extends HttpServlet {
             HttpSession session = request.getSession();
             Categorias categoria = catDAO.findById(id);
 
-            if(categoria != null){
+            if (categoria == null) {
+                session.setAttribute("failMsg", "Categoria não encontrada!");
+                response.sendRedirect("admin/all_categories.jsp");
+                return;
+            }
+
+            boolean isVinculada = catDAO.isCategoriaVinculada(id);
+
+            if (isVinculada) {
                 session.setAttribute("failMsg", "Categoria vinculada, impossível excluir!");
                 response.sendRedirect("admin/all_categories.jsp");
-            }else{
+            } else {
                 boolean verificar = catDAO.delete(id);
 
-                if(verificar){
+                if (verificar) {
                     session.setAttribute("sucessMsg", "Categoria excluída com sucesso!");
                     response.sendRedirect("admin/all_categories.jsp");
-                }else{
+                } else {
                     session.setAttribute("failMsg", "Ocorreu um erro ao tentar excluir a categoria...");
                     response.sendRedirect("admin/all_categories.jsp");
                 }
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            HttpSession session = request.getSession();
+            session.setAttribute("failMsg", "Erro ao tentar excluir a categoria.");
+            response.sendRedirect("admin/all_categories.jsp");
         }
     }
 }

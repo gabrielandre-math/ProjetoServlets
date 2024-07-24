@@ -1,6 +1,7 @@
 <%@ page import="com.service.servlet.projeto.Database.DAO.LivroDAOImpl" %>
 <%@ page import="com.service.servlet.projeto.Database.Model.Livros" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.service.servlet.projeto.Database.Connection.DBConnection" %><%--
   Created by IntelliJ IDEA.
   User: luucc
   Date: 22/07/2024
@@ -67,6 +68,7 @@
 <div class="container mt-4">
     <div class="row basic-staggering-demo">
         <%
+            DBConnection.getConnection();
             LivroDAOImpl livroDAO = new LivroDAOImpl();
             List<Livros> livros = livroDAO.getAllRecentBooks();
             for (Livros livro : livros) {
@@ -79,17 +81,29 @@
                     <p>Categoria: <%=livro.getCategoria().getNome()%></p>
 
                     <%
-                        if("Novo".equalsIgnoreCase(livro.getNovoVelho())){
+                    if("Novo".equalsIgnoreCase(livro.getNovoVelho())){
                     %>
-                    <div class="btn-group d-flex justify-content-center mt-4">
-                        <a href="" class="btn btn-danger btn-sm diagonal-button">Adicionar ao Carrinho</a>
-                        <a href="" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
-                    </div>
+                    <%
+                        if (Boolean.FALSE.equals(session.getAttribute("loggedIn"))){
+                    %>
+                        <div class="btn-group d-flex justify-content-center mt-4">
+                            <a href="view_books.jsp?bid=<%=livro.getId()%>" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
+                        </div>
+                    <%
+                        }else{
+                    %>
+                        <div class="btn-group d-flex justify-content-center mt-4">
+                            <a href="add_books_user.jsp?bid=<%=livro.getId()%>" class="btn btn-danger btn-sm diagonal-button">Pegar emprestado</a>
+                            <a href="view_books.jsp?bid=<%=livro.getId()%>" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
+                        </div>
+                    <%
+                        }
+                    %>
                     <%
                     }else{
                     %>
                     <div class="btn-group d-flex justify-content-center mt-4">
-                        <a href="" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
+                        <a href="view_books.jsp?bid=<%=livro.getId()%>" class="btn btn-success btn-sm diagonal-button">Visualizar</a>
                     </div>
                     <%
                         }

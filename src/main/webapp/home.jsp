@@ -1,3 +1,6 @@
+<%@ page import="com.service.servlet.projeto.Database.DAO.UsuarioDAOImpl" %>
+<%@ page import="com.service.servlet.projeto.Database.Model.Usuarios" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
 <html>
@@ -55,6 +58,22 @@
                 </div>
             </a>
         </div>
+
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <%
+                session = request.getSession(false);
+                Long id = (session != null) ? (Long) session.getAttribute("userId") : null;
+            %>
+            <a href="edit_user.jsp">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="fa-solid fa-user text-primary"></i><br/>
+                        <h4>Editar Conta</h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+
 
         <div class="col-12 col-md-6 col-lg-4 mb-4">
             <a href="logout.jsp">

@@ -1,4 +1,4 @@
-package com.service.servlet.projeto.Controller;
+package com.service.servlet.projeto.MainController.UserController;
 
 import com.service.servlet.projeto.Database.Connection.DBConnection;
 import jakarta.servlet.ServletException;
@@ -12,6 +12,7 @@ import java.io.IOException;
 
 @WebServlet("/index")
 public class InitialPage extends HttpServlet {
+    HttpSession session;
 
     @Override
     public void init() throws ServletException {

@@ -1,4 +1,4 @@
-package com.service.servlet.projeto.AdmController;
+package com.service.servlet.projeto.MainController.AdmController;
 
 import com.service.servlet.projeto.Database.DAO.UsuarioDAOImpl;
 import jakarta.servlet.ServletException;
