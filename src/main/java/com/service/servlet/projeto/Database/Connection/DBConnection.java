@@ -1,4 +1,4 @@
-package com.service.servlet.projeto.DB;
+package com.service.servlet.projeto.Database.Connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

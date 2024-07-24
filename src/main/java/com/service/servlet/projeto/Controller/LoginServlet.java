@@ -1,8 +1,8 @@
 package com.service.servlet.projeto.Controller;
 
-import com.service.servlet.projeto.DAO.UsuarioDAOImpl;
-import com.service.servlet.projeto.DB.DBConnection;
-import com.service.servlet.projeto.Model.Usuarios;
+import com.service.servlet.projeto.Database.DAO.UsuarioDAOImpl;
+import com.service.servlet.projeto.Database.Connection.DBConnection;
+import com.service.servlet.projeto.Database.Model.Usuarios;
 import com.service.servlet.projeto.Service.UserAuthenticate;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

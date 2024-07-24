@@ -1,6 +1,6 @@
-<%@ page import="com.service.servlet.projeto.DAO.LivroDAOImpl" %>
-<%@ page import="com.service.servlet.projeto.Model.Livros" %>
-<%@ page import="com.service.servlet.projeto.Model.Usuarios" %>
+<%@ page import="com.service.servlet.projeto.Database.DAO.LivroDAOImpl" %>
+<%@ page import="com.service.servlet.projeto.Database.Model.Livros" %>
+<%@ page import="com.service.servlet.projeto.Database.Model.Usuarios" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>

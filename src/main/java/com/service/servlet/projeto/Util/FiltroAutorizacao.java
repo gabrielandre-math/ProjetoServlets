@@ -1,4 +1,4 @@
-package com.service.servlet.projeto.Service;
+package com.service.servlet.projeto.Util;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

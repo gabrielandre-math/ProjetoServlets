@@ -1,5 +1,5 @@
-<%@ page import="com.service.servlet.projeto.DAO.CategoriaDAOImpl" %>
-<%@ page import="com.service.servlet.projeto.Model.Categorias" %>
+<%@ page import="com.service.servlet.projeto.Database.DAO.CategoriaDAOImpl" %>
+<%@ page import="com.service.servlet.projeto.Database.Model.Categorias" %>
 <%--
   Created by IntelliJ IDEA.
   User: luucc

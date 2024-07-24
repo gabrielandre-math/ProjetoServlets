@@ -1,8 +1,8 @@
-package com.service.servlet.projeto.DAO;
+package com.service.servlet.projeto.Database.DAO;
 
-import com.service.servlet.projeto.Model.Livros;
-import com.service.servlet.projeto.Model.Categorias;
-import com.service.servlet.projeto.Model.Usuarios;
+import com.service.servlet.projeto.Database.Model.Livros;
+import com.service.servlet.projeto.Database.Model.Categorias;
+import com.service.servlet.projeto.Database.Model.Usuarios;
 
 import java.sql.*;
 import java.util.ArrayList;

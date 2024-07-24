@@ -1,5 +1,6 @@
 package com.service.servlet.projeto.Controller;
 
+import com.service.servlet.projeto.Database.Connection.DBConnection;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,6 +16,7 @@ public class InitialPage extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
+        DBConnection.getConnection();
     }
 
     @Override

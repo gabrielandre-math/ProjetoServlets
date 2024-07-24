@@ -1,59 +1,31 @@
-ISBN,Nome,Categoria_id,Quantidade
-9780451524935,Dom Quixote,1,25
-9780486421209,Romeu e Julieta,2,20
-9780486280615,Hamlet,3,30
-9788537800682,A Arte da Guerra,4,35
-9780553214325,Orgulho e Preconceito,1,15
-9780061122415,Harry Potter e a Pedra Filosofal,5,40
-9780345803504,1984,6,45
-9780140447097,Odisseia,7,10
-9780141439846,Grande Sertão: Veredas,8,35
-9788573260277,Cem Anos de Solidão,9,30
-9780345391803,Duna,6,25
-9780385475723,O Apanhador no Campo de Centeio,1,40
-9788573029578,Memórias Póstumas de Brás Cubas,8,50
-9780547928227,As Crônicas de Nárnia,5,60
-9788535908066,A Insustentável Leveza do Ser,1,65
-9788525427620,Filosofia para Corajosos,10,40
-9780553386790,Fundação,6,35
-9780380002457,Fahrenheit 451,6,55
-9788532520262,A Revolução dos Bichos,11,30
-9788535909551,Ensaio Sobre a Cegueira,12,20
-9788544001163,O Lobo da Estepe,8,35
-9788532521696,Admirável Mundo Novo,12,40
-9788575220446,Diário de Anne Frank,14,50
-9788532502626,O Cortiço,1,55
-9788535908325,Dom Casmurro,1,60
-9788535900701,O Primo Basílio,1,25
-9788535909452,Os Miseráveis,1,35
-9788563560265,A Metamorfose,12,30
-9788575039105,A Divina Comédia,7,20
-9788573260741,O Alienista,8,40
-9788532521740,Crime e Castigo,1,45
-9788580630270,Do Mil ao Milhão,15,55
-9788535909735,A Menina que Roubava Livros,1,60
-9788532521276,Guerra e Paz,1,65
-9788535913138,A Guerra dos Tronos,5,35
-9788532522358,Os Irmãos Karamazov,1,40
-9788532513134,O Pequeno Príncipe,16,30
-9788525419762,Anna Kariênina,1,20
-9788532513820,O Retrato de Dorian Gray,1,25
-9788532503913,O Guarani,1,35
-9788532527971,O Nome da Rosa,17,40
-9788532507003,Memórias de um Sargento de Milícias,19,45
-9788580410228,A Ilíada,7,50
-9788501059233,O Senhor dos Anéis,5,60
-9788532507812,Sherlock Holmes - Um Estudo em Vermelho,19,65
-9788501093558,Trilogia Cósmica,6,25
-9788532529883,O Hobbit,5,30
-9788532523881,O Conde de Monte Cristo,20,35
-9788532503760,Sagarana,8,40
-9788532528923,O Cemitério,12,50
-9788571107042,A Cidade e as Serras,8,55
-9788532510195,A Moreninha,18,65
-9788532529111,A Dança dos Dragões,5,20
-9788535905638,A Cabana,21,30
-9788532502190,Dom Perlimplim,22,25
-9788532510287,Clara dos Anjos,8,30
-9788532530582,O Morro dos Ventos Uivantes,1,40
-9788501023619,Pride and Prejudice,1,45
+ISBN,Nome,Categoria_id,Quantidade,Imagem,Novo_velho,Status
+9780451524935,Dom Quixote,1,25,DQ.jpeg,Novo,Ativo
+9780486421209,Romeu e Julieta,2,20,RJ.jpeg,Velho,Ativo
+9780486280615,Hamlet,3,30,HLT.jpeg,Novo,Inativo
+9788537800682,A Arte da Guerra,4,35,AG.jpg,Velho,Ativo
+9780553214325,Orgulho e Preconceito,1,15,OP.jpg,Novo,Ativo
+9780061122415,Harry Potter e a Pedra Filosofal,5,40,HPPF.jpg,Velho,Ativo
+9780345803504,1984,6,45,1984.jpeg,Novo,Ativo
+9780140447097,Odisseia,7,10,OD.jpg,Velho,Ativo
+9780141439846,Grande Sertão: Veredas,8,35,GSV.jpg,Novo,Ativo
+9788573260277,Cem Anos de Solidão,9,30,CAS.jpeg,Velho,Ativo
+9780345391803,Duna,6,25,DN.jpg,Novo,Ativo
+9780385475723,O Apanhador no Campo de Centeio,1,40,ACC.jpg,Velho,Ativo
+9788573029578,Memórias Póstumas de Brás Cubas,8,50,MPBC.jpeg,Velho, Inativo
+9780547928227,As Crônicas de Nárnia,5,60,CN.jpeg,Velho,Ativo
+9788535908066,A Insustentável Leveza do Ser,1,65,ILS.jpg,Velho,Inativo
+9788525427620,Filosofia para Corajosos,10,40,FPC.jpeg,Novo,Ativo
+9780553386790,Fundação,6,35,FDC.jpg,Novo,Inativo
+9780380002457,Fahrenheit 451,6,55,FRHT.jpeg,Novo,Ativo
+9788532520262,A Revolução dos Bichos,11,30,RDB.jpeg,Novo,Inativo
+9788535909551,Ensaio Sobre a Cegueira,12,20,ESC.jpeg,Novo,Ativo
+9788544001163,O Lobo da Estepe,8,35,LDE.jpeg,Velho,Ativo
+9788532521696,Admirável Mundo Novo,12,40,AMN.jpeg,Velho,Ativo
+9788575220446,Diário de Anne Frank,14,50,DAF.jpg,Velho,Inativo
+9788532502626,O Cortiço,1,55,CT.jpg,Velho,Inativo
+9788535908325,Dom Casmurro,1,60,DC.jpeg,Novo,Inativo
+9788535900701,O Primo Basílio,1,25,PB.jpeg,Novo,Ativo
+9788535909452,Os Miseráveis,1,35,MSV.jpg,Novo,Ativo
+9788563560265,A Metamorfose,12,30,MTM.jpeg,Velho,Ativo
+9788575039105,A Divina Comédia,7,20,ADC.jpg,Velho,Inativo
+9788573260741,O Alienista,8,40,OAL.jpeg,Novo,Ativo

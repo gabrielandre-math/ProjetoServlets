@@ -1,4 +1,4 @@
-package com.service.servlet.projeto.Model;
+package com.service.servlet.projeto.Database.Model;
 
 import java.util.List;
 import java.util.Objects;
