@@ -5,7 +5,7 @@
     <!-- Configurações do Servlet e JSP -->
     <filter>
         <filter-name>AuthorizationFilter</filter-name>
-        <filter-class>com.service.servlet.projeto.Service.FiltroAutorizacao</filter-class>
+        <filter-class>com.service.servlet.projeto.Util.FiltroAutorizacao</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>AuthorizationFilter</filter-name>

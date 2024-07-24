@@ -1,5 +1,5 @@
-<%@ page import="com.service.servlet.projeto.DAO.LivroDAOImpl" %>
-<%@ page import="com.service.servlet.projeto.Model.Livros" %><%--
+<%@ page import="com.service.servlet.projeto.Database.DAO.LivroDAOImpl" %>
+<%@ page import="com.service.servlet.projeto.Database.Model.Livros" %><%--
   Created by IntelliJ IDEA.
   User: luucc
   Date: 15/07/2024

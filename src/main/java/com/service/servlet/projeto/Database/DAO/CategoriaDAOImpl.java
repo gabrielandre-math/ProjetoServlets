@@ -1,6 +1,6 @@
-package com.service.servlet.projeto.DB.DAO;
+package com.service.servlet.projeto.Database.DAO;
 
-import com.service.servlet.projeto.DB.Model.Categorias;
+import com.service.servlet.projeto.Database.Model.Categorias;
 
 import java.sql.*;
 import java.util.ArrayList;
