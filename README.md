@@ -3,8 +3,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/gabrielandre-math/ProjetoServlets?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/gabrielandre-math/ProjetoServlets?style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/gabrielandre-math/ProjetoServlets?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/gabrielandre-math/ProjetoServlets?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/gabrielandre-math/ProjetoServlets?style=for-the-badge)
+
 
 ![logo-servlet-book](https://github.com/user-attachments/assets/42ae3215-8994-4135-a3df-5119cebb00c8)
 
