@@ -1,16 +1,13 @@
 <%@ page import="com.service.servlet.projeto.DAO.LivroDAOImpl" %>
-<%@ page import="com.service.servlet.projeto.Model.Livros" %><%--
-  Created by IntelliJ IDEA.
-  User: luucc
-  Date: 15/07/2024
-  Time: 18:43
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.service.servlet.projeto.Model.Livros" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%@ page isELIgnored="false" %>
-<html>
+<!DOCTYPE html>
+<html lang="pt">
 <head>
+    <title>Adm: Editar Livro</title>
+    <%@include file="allCss.jsp"%>
     <style>
         body {
             background-color: #f7f7f7;
@@ -75,18 +72,15 @@
             background-color: #6E49D7;
         }
     </style>
-
-    <title>Adm: Adicionar Livros</title>
-    <%@include file="allCss.jsp"%>
 </head>
 <body>
 <%@include file="/all_Component/navbar.jsp"%>
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 offset-md-4">
-            <div class="card">
+<div class="container mt-5 container-spacing">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card fade-in" id="form-card">
                 <div class="card-body">
-                    <h4 class="text-center">Editar Livro</h4>
+                    <h4 class="text-center title">Editar Livro</h4>
 
                     <%
                         Long id = Long.parseLong(request.getParameter("id"));
@@ -95,69 +89,54 @@
                     %>
 
                     <form action="../editbooks" method="post">
-
                         <input type="hidden" name="id" value="<%=livro.getId()%>">
 
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label for="exampleInputBookName">Nome do Livro</label>
                             <input name="nomeLivro" type="text" class="form-control"
-                                   id="exampleInputBookName" value="<%=livro.getNome()%>">
+                                   id="exampleInputBookName" value="<%=livro.getNome()%>" required>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label for="exampleInputBookISBN">ISBN</label>
                             <input name="isbnLivro" type="text" class="form-control"
-                                   id="exampleInputBookISBN" value="<%=livro.getIsbn()%>">
+                                   id="exampleInputBookISBN" value="<%=livro.getIsbn()%>" required>
                         </div>
                         <div class="form-group mb-3">
                             <label for="novoVelho">Estado</label>
                             <select id="novoVelho" name="novoVelho" class="form-select" required>
-                                <%
-                                    if("Velho".equalsIgnoreCase(livro.getNovoVelho())){
-                                %>
-                                <option value="Novo">Livro Novo</option>
-                                <option value="Velho">Livro Velho</option>
-                                <%
-                                }else{
-                                %>
-                                <option value="Velho">Livro Velho</option>
-                                <option value="Novo">Livro Novo</option>
-                                <%
-                                    }
-                                %>
+                                <option value="Novo" <%= "Novo".equalsIgnoreCase(livro.getNovoVelho()) ? "selected" : "" %>>Livro Novo</option>
+                                <option value="Velho" <%= "Velho".equalsIgnoreCase(livro.getNovoVelho()) ? "selected" : "" %>>Livro Velho</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label for="inputState">Status</label>
-                            <select id="inputState" name="status" class="form-control">
-                                <%
-                                    if("Ativo".equals(livro.getStatus())){
-                                %>
-                                <option value="Ativo">Ativo</option>
-                                <option value="Inativo">Inativo</option>
-                                <%
-                                }else{
-                                %>
-                                <option value="Inativo">Inativo</option>
-                                <option value="Ativo">Ativo</option>
-                                <%
-                                }
-                                %>
+                            <select id="inputState" name="status" class="form-control" required>
+                                <option value="Ativo" <%= "Ativo".equals(livro.getStatus()) ? "selected" : "" %>>Ativo</option>
+                                <option value="Inativo" <%= "Inativo".equals(livro.getStatus()) ? "selected" : "" %>>Inativo</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label for="exampleInputBookQuantity">Quantidade</label>
-                            <input name="qtdLivro" type="text" class="form-control"
-                                   id="exampleInputBookQuantity" value="<%=livro.getQuantidade()%>">
+                            <input name="qtdLivro" type="number" class="form-control"
+                                   id="exampleInputBookQuantity" value="<%=livro.getQuantidade()%>" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Atualizar</button>
+                        <button type="submit" class="btn bg-custom text-white w-100 d-block">Atualizar</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div style="margin-top: 120px;">
-    <%@include file="/all_Component/footer.jsp"%>
-</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(function() {
+            document.getElementById('form-card').classList.add('visible');
+        }, 200);
+    });
+</script>
+
 </body>
+<footer style="margin-top: 130px;">
+    <%@include file="/all_Component/footer.jsp" %>
+</footer>
 </html>

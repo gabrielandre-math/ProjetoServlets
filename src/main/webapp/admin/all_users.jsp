@@ -65,6 +65,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Email</th>
+                <th scope="col">Senha</th>
                 <th scope="col">Ação</th>
             </tr>
             </thead>
@@ -78,6 +79,7 @@
                 <td><%=usuario.getId()%></td>
                 <td><%=usuario.getNome()%></td>
                 <td><%=usuario.getEmail()%></td>
+                <td><%=usuario.getSenha()%></td>
                 <td>
                     <%
                         if(usuario.getId() != 1){

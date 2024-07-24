@@ -58,43 +58,44 @@
     <c:remove var="failMsg" scope="session"/>
 </c:if>
 
-<div class="container">
-    <table class="table table-striped">
-        <thead class="bg-primary text-white">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Imagem</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Categoria</th>
-            <th scope="col">Quantidade</th>
-            <th scope="col">Ação</th>
-        </tr>
-        </thead>
-        <tbody>
-        <%
-            LivroDAOImpl livroDAO = new LivroDAOImpl();
-            List<Livros> livros = livroDAO.findAll();
-            for(Livros livro : livros) {
-        %>
-        <tr class="el">
-            <td><%=livro.getId()%></td>
-            <td><img src="../books/<%=livro.getImagem()%>"
-                     style="width: 50px; height: 50px;"></td>
-            <td><%=livro.getNome()%></td>
-            <td><%=livro.getCategoria().getNome()%></td>
-            <td><%=livro.getQuantidade()%></td>
-            <td>
-                <a href="edit_books.jsp?id=<%=livro.getId()%>" class="btn btn-sm btn-primary">Editar</a>
-                <a href="../delete?id=<%=livro.getId()%>" class="btn btn-sm btn-danger">Excluir</a>
-            </td>
-        </tr>
-        <%
-            }
-        %>
-        </tbody>
-    </table>
+<div class="container mt-4">
+    <h3 class="text-center">Todos os Livros</h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="bg-primary text-white">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Imagem</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Ação</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%
+                LivroDAOImpl livroDAO = new LivroDAOImpl();
+                List<Livros> livros = livroDAO.findAll();
+                for(Livros livro : livros) {
+            %>
+            <tr class="el">
+                <td><%=livro.getId()%></td>
+                <td><img src="../books/<%=livro.getImagem()%>" style="width: 50px; height: 50px;"></td>
+                <td><%=livro.getNome()%></td>
+                <td><%=livro.getCategoria().getNome()%></td>
+                <td><%=livro.getQuantidade()%></td>
+                <td>
+                    <a href="edit_books.jsp?id=<%=livro.getId()%>" class="btn btn-sm btn-primary">Editar</a>
+                    <a href="../delete?id=<%=livro.getId()%>" class="btn btn-sm btn-danger">Excluir</a>
+                </td>
+            </tr>
+            <%
+                }
+            %>
+            </tbody>
+        </table>
+    </div>
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
@@ -112,9 +113,9 @@
                         translateX: [300, 0],
                         opacity: [0, 1],
                         easing: 'easeOutExpo',
-                        delay: anime.stagger(100) // incrementa o delay em 100ms para cada elemento
+                        delay: anime.stagger(100)
                     });
-                    $(this).removeClass('el'); // Remove a classe para evitar a repetição da animação
+                    $(this).removeClass('el');
                 }
             });
         }
