@@ -106,14 +106,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
         </sub>
       </a>
     </td>
-    <td align="center">
-      <a href="#" title="contribuidor">
-        <img src="https://avatars.githubusercontent.com/u/115745238?v=4" width="100px;" alt="Foto da Janete"/><br>
-        <sub>
-          <b>Janete</b>
-        </sub>
-      </a>
-    </td>
+    
   </tr>
 </table>
 
@@ -125,7 +118,7 @@ Quer fazer parte desse projeto? Clique [AQUI](CONTRIBUTING.md) e leia como contr
 
 Este projeto foi desenvolvido como parte de um curso educacional e é destinado apenas para fins de aprendizado e desenvolvimento de habilidades. A distribuição, modificação e uso comercial deste software são proibidos sem permissão explícita.
 
-Direitos Autorais © 2024 Gabriel André, Lucas Gabriel e Janete
+Direitos Autorais © 2024 Gabriel André e Lucas Gabriel.
 
 ### Termos e Condições
 
@@ -142,8 +135,6 @@ Para mais informações, entre em contato com:
 gabriel.alsilva@ufn.edu.br
 
 lucas.grferreira@ufn.edu.br
-
-janete.lfs@ufn.edu.br.
 
 
 
