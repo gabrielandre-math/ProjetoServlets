@@ -9,6 +9,7 @@
 
 ## Tecnologias Utilizadas
 - Java
+- JDBC
 - Servlet
 - JSP
 - Bootstrap 5
