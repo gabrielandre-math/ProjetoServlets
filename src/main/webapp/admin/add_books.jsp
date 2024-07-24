@@ -65,6 +65,14 @@
         .custom-file-input {
             display: none;
         }
+        .custom-file-upload.selected {
+            background-color: #28a745; /* Verde */
+            color: #fff;
+        }
+        #file-name {
+            margin-top: 10px;
+            font-weight: bold;
+        }
         .bg-custom {
             background-color: #6E49D7;
         }
@@ -104,7 +112,6 @@
                             <select id="categoriaLivro" name="categoriaLivro" class="form-select" required>
                                 <option value="" disabled selected>Selecione</option>
                                 <!-- As opções de categoria -->
-                                <option selected>Selecione</option>
                                 <option value="1">Romance</option>
                                 <option value="2">Clássico</option>
                                 <option value="3">Tragédia</option>
@@ -133,7 +140,6 @@
                             <label for="novoVelho">Estado</label>
                             <select id="novoVelho" name="novoVelho" class="form-select" required>
                                 <option value="" disabled selected>Selecione</option>
-                                <!-- As opções de categoria -->
                                 <option value="Novo">Livro Novo</option>
                                 <option value="Velho">Livro Velho</option>
                             </select>
@@ -142,7 +148,6 @@
                             <label for="status">Status</label>
                             <select id="status" name="status" class="form-select" required>
                                 <option value="" disabled selected>Selecione</option>
-                                <!-- As opções de categoria -->
                                 <option value="Ativo">Ativo</option>
                                 <option value="Inativo">Inativo</option>
                             </select>
@@ -153,10 +158,11 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="imagemLivro">Imagem</label>
-                            <label class="custom-file-upload">
+                            <label class="custom-file-upload" id="file-upload-label">
                                 <input type="file" name="imagemLivro" id="imagemLivro" class="custom-file-input">
                                 Escolher Arquivo
                             </label>
+                            <p id="file-name">Nenhum arquivo selecionado</p>
                         </div>
                         <button type="submit" class="btn bg-custom text-white w-100 d-block">Adicionar</button>
                     </form>
@@ -166,13 +172,27 @@
     </div>
 </div>
 
-
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         setTimeout(function() {
             document.getElementById('form-card').classList.add('visible');
         }, 200);
     });
+
+    // Atualiza o nome do arquivo selecionado e altera o estilo do botão
+    document.getElementById('imagemLivro').addEventListener('change', function() {
+        var fileName = this.files[0] ? this.files[0].name : 'Nenhum arquivo selecionado';
+        document.getElementById('file-name').textContent = fileName;
+        var label = document.getElementById('file-upload-label');
+        if (this.files.length > 0) {
+            label.classList.add('selected');
+        } else {
+            label.classList.remove('selected');
+        }
+    });
 </script>
 </body>
+<footer style="margin-top: 130px;">
+    <%@ include file="/all_Component/footer.jsp"%>
+</footer>
 </html>

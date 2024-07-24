@@ -68,9 +68,6 @@
         </div>
     </div>
 </div>
-<div style="margin-top: 130px;">
-    <%@include file="/all_Component/footer.jsp"%>
-</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -114,5 +111,8 @@
     });
 </script>
 </body>
+<footer style="margin-top: 130px;">
+    <%@include file="/all_Component/footer.jsp" %>
+</footer>
 </html>
 

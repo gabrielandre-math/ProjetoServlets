@@ -145,7 +145,7 @@
     });
 </script>
 </body>
-<footer>
-    <%@ include file="/all_Component/footer.jsp"%>
+<footer style="margin-top: 130px;">
+    <%@include file="/all_Component/footer.jsp" %>
 </footer>
 </html>

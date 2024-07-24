@@ -109,7 +109,7 @@
                                 <%
                                     for(Livros livro : livros){
                                 %>
-                                    <option><%=livro.getNome()%></option>
+                                <option value="<%=livro.getId()%>"><%=livro.getNome()%></option>
                                 <%
                                     }
                                 %>
@@ -117,9 +117,9 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="qtdLivro">Quantidade</label>
-                            <input name="qtdLivro" type="number" maxlength="1" class="form-control" id="qtdLivro" value="1" required>
+                            <input name="qtdLivro" type="number" class="form-control" id="qtdLivro" value="1" min="1" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Adicionar Livro</button>
+                        <button type="submit" class="btn bg-custom text-white w-100 d-block">Adicionar Livro</button>
                     </form>
 
                     <script>
@@ -135,4 +135,7 @@
     </div>
 </div>
 </body>
+<footer style="margin-top: 130px;">
+    <%@include file="/all_Component/footer.jsp" %>
+</footer>
 </html>

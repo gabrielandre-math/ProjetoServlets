@@ -30,14 +30,6 @@
         e.printStackTrace();
     }
 %>
-<%
-    try {
-        // Para fins de depuração. Utilizei para monitorar o comportamento da sessão
-        System.out.println("LoggedIn: " + session.getAttribute("loggedIn"));
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -142,11 +134,20 @@
                     </div>
                 </c:when>
                 <c:otherwise>
-                    <div class="navbar-nav ms-auto d-flex">
-                        <a class="btn bg-custom text-white me-2 mb-2 mb-lg-0" href="../logout.jsp">Sair</a>
+                    <div class="navbar-nav ms-auto d-flex align-items-center flex-column flex-md-row">
+                        <c:choose>
+                            <c:when test="${usuario.isAdmin() == false}">
+                                <a class="btn bg-custom text-white w-100 mb-2 mb-md-0 me-md-2" href="../home.jsp">Painel</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="btn bg-custom text-white w-100 mb-2 mb-md-0 me-md-2" href="../admin/home-admin.jsp">Painel</a>
+                            </c:otherwise>
+                        </c:choose>
+                        <a class="btn bg-custom text-white w-100 mb-2 mb-md-0" href="../logout.jsp">Sair</a>
                     </div>
                 </c:otherwise>
             </c:choose>
+
 
         </div>
     </div>
