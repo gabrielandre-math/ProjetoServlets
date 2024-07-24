@@ -11,7 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin: Todos os Usuários</title>
     <%@include file="allCss.jsp" %>
-
     <style>
         /* Estilos mobile-first */
         .table td, .table th {
@@ -73,23 +72,27 @@
             <%
                 UsuarioDAOImpl usuarioDAO = new UsuarioDAOImpl();
                 List<Usuarios> usuarios = usuarioDAO.findAll();
-                for(Usuarios usuario : usuarios) {
+                for (Usuarios usuario : usuarios) {
             %>
+            <c:set var="usuarioAtual" value="<%=usuario%>" />
             <tr class="el">
                 <td><%=usuario.getId()%></td>
                 <td><%=usuario.getNome()%></td>
                 <td><%=usuario.getEmail()%></td>
-                <td><%=usuario.getSenha()%></td>
                 <td>
-                    <%
-                        if(usuario.getId() != 1){
-                    %>
-                    <td><%=usuario.getSenha()%></td>
+                    <c:choose>
+                        <c:when test="${usuarioAtual.id == 1}">
+                            ********
+                        </c:when>
+                        <c:otherwise>
+                            <%=usuario.getSenha()%>
+                        </c:otherwise>
+                    </c:choose>
+                </td>
+                <td>
+
                     <a href="edit_users.jsp?id=<%=usuario.getId()%>" class="btn btn-sm btn-primary">Editar</a>
                     <a href="../delete-user?id=<%=usuario.getId()%>" class="btn btn-sm btn-danger">Excluir</a>
-                    <%
-                        }
-                    %>
                 </td>
             </tr>
             <%
@@ -129,11 +132,8 @@
         animateOnScroll();
     });
 </script>
-
-
 </body>
 <footer style="margin-top: 130px;">
     <%@include file="/all_Component/footer.jsp" %>
 </footer>
-
 </html>
