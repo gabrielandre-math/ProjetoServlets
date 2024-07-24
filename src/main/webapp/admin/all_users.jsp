@@ -79,6 +79,7 @@
                 <td><%=usuario.getId()%></td>
                 <td><%=usuario.getNome()%></td>
                 <td><%=usuario.getEmail()%></td>
+                <td><%=usuario.getSenha()%></td>
                 <td>
                     <%
                         if(usuario.getId() != 1){
