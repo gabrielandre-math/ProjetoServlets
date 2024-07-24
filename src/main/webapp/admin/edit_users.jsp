@@ -1,17 +1,13 @@
 <%@ page import="com.service.servlet.projeto.DAO.UsuarioDAOImpl" %>
 <%@ page import="com.service.servlet.projeto.Model.Usuarios" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: luucc
-  Date: 15/07/2024
-  Time: 18:43
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%@ page isELIgnored="false" %>
-<html>
+<!DOCTYPE html>
+<html lang="pt">
 <head>
+    <title>Adm: Editar Usuário</title>
+    <%@include file="allCss.jsp"%>
     <style>
         body {
             background-color: #f7f7f7;
@@ -75,55 +71,55 @@
         .bg-custom {
             background-color: #6E49D7;
         }
+        .container-spacing {
+            margin-bottom: 40px;
+        }
     </style>
-
-    <title>Adm: Adicionar Livros</title>
-    <%@include file="allCss.jsp"%>
 </head>
 <body>
 <%@include file="/all_Component/navbar.jsp"%>
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 offset-md-4">
-            <div class="card">
+<div class="container mt-5 container-spacing">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card fade-in" id="form-card">
                 <div class="card-body">
-                    <h4 class="text-center">Editar Usuario</h4>
-
+                    <h4 class="text-center title">Editar Usuário</h4>
                     <%
                         Long id = Long.parseLong(request.getParameter("id"));
                         UsuarioDAOImpl usuarioDAO = new UsuarioDAOImpl();
                         Usuarios usuario = usuarioDAO.findById(id);
                     %>
-
                     <form action="../edituser" method="post">
-
                         <input type="hidden" name="id" value="<%=usuario.getId()%>">
-
-                        <div class="form-group">
-                            <label for="exampleInputName">Nome do Livro</label>
-                            <input name="nome" type="text" class="form-control"
-                                   id="exampleInputName" value="<%=usuario.getNome()%>">
+                        <div class="form-group mb-3">
+                            <label for="nomeUsuario">Nome do Usuário</label>
+                            <input name="nome" type="text" class="form-control" id="nomeUsuario" value="<%=usuario.getNome()%>" required>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail">Email</label>
-                            <input name="email" type="text" class="form-control"
-                                   id="exampleInputEmail" value="<%=usuario.getEmail()%>">
+                        <div class="form-group mb-3">
+                            <label for="emailUsuario">Email</label>
+                            <input name="email" type="email" class="form-control" id="emailUsuario" value="<%=usuario.getEmail()%>" required>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword">ISBN</label>
-                            <input name="password" type="text" class="form-control"
-                                   id="exampleInputPassword" value="<%=usuario.getSenha()%>">
+                        <div class="form-group mb-3">
+                            <label for="senhaUsuario">Senha</label>
+                            <input name="password" type="password" class="form-control" id="senhaUsuario" value="<%=usuario.getSenha()%>" required>
                         </div>
-
-                        <button type="submit" class="btn btn-primary">Atualizar</button>
+                        <button type="submit" class="btn bg-custom text-white w-100 d-block">Atualizar</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div style="margin-top: 40px;">
-    <%@include file="/all_Component/footer.jsp"%>
-</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(function() {
+            document.getElementById('form-card').classList.add('visible');
+        }, 200);
+    });
+</script>
+
 </body>
+<footer style="margin-top: 130px;">
+    <%@include file="/all_Component/footer.jsp" %>
+</footer>
 </html>

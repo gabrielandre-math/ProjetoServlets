@@ -81,7 +81,8 @@
     </div>
 </div>
 
-
-
 </body>
+<footer style="margin-top: 130px;">
+    <%@include file="/all_Component/footer.jsp" %>
+</footer>
 </html>

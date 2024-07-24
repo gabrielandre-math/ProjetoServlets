@@ -76,8 +76,9 @@
         }, 200); // 200ms delay before starting the animation
     });
 </script>
+
+</body>
 <footer>
     <%@ include file="all_Component/footer.jsp"%>
 </footer>
-</body>
 </html>
