@@ -34,20 +34,21 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 ## 💻 Pré-requisitos
 
-Antes de começar, verifique se você atendeu aos seguintes requisitos:
+Certifique-se de ter o Docker instalado no seu computador, assim como o Tomcat (versão 10.1.26) e suas respectivas dependências. 
+Para rodar o ServletBook em sua máquina, baixe:
 
-- Você instalou a versão mais recente de `<linguagem / dependência / requeridos>`
-- Você tem uma máquina `<Windows / Linux / Mac>`. Indique qual sistema operacional é compatível / não compatível.
-- Você leu `<guia / link / documentação_relacionada_ao_projeto>`.
-
-## 🚀 Instalando ProjetoServlets
-Certifique-se de ter o Docker instalado no seu computador, assim como o tomcat e suas dependencias. 
-Para instalar o ServletBook, siga estas etapas:
 ### Download do Docker
 [Baixar](https://docs.docker.com/desktop/install/windows-install/)
 
 ### Download do TomCat (versão 10.1.26)
 [Baixar](https://tomcat.apache.org/download-10.cgi)
+
+## 🚀 Baixando e Instalando o ProjetoServlets
+Em seu terminal, no diretório que deseja armazenar o projeto, faça: 
+
+```
+git clone https://github.com/gabrielandre-math/ProjetoServlets.git
+```
 
 ## ☕ Usando ProjetoServlets
 
@@ -125,7 +126,7 @@ Quer fazer parte desse projeto? Clique [AQUI](CONTRIBUTING.md) e leia como contr
 
 Este projeto foi desenvolvido como parte de um curso educacional e é destinado apenas para fins de aprendizado e desenvolvimento de habilidades. A distribuição, modificação e uso comercial deste software são proibidos sem permissão explícita.
 
-Direitos Autorais © [2024] [Gabriel André, Lucas Gabriel e Janete]
+Direitos Autorais © 2024 Gabriel André, Lucas Gabriel e Janete
 
 ### Termos e Condições
 
