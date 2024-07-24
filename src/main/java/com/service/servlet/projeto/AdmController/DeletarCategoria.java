@@ -1,7 +1,7 @@
 package com.service.servlet.projeto.AdmController;
 
-import com.service.servlet.projeto.DAO.CategoriaDAOImpl;
-import com.service.servlet.projeto.Model.Categorias;
+import com.service.servlet.projeto.Database.DAO.CategoriaDAOImpl;
+import com.service.servlet.projeto.Database.Model.Categorias;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/delete-category")
 public class DeletarCategoria extends HttpServlet {

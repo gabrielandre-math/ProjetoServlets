@@ -1,6 +1,6 @@
 package com.service.servlet.projeto.Service;
 
-import com.service.servlet.projeto.Model.Usuarios;
+import com.service.servlet.projeto.Database.Model.Usuarios;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package com.service.servlet.projeto.DAO;
+package com.service.servlet.projeto.Database.DAO;
 
-import com.service.servlet.projeto.DB.DBConnection;
+import com.service.servlet.projeto.Database.Connection.DBConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;

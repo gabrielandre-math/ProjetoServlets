@@ -1,8 +1,8 @@
 package com.service.servlet.projeto.Controller;
 
-import com.service.servlet.projeto.DAO.LivroDAOImpl;
-import com.service.servlet.projeto.DAO.UsuarioDAOImpl;
-import com.service.servlet.projeto.Model.Livros;
+import com.service.servlet.projeto.Database.DAO.LivroDAOImpl;
+import com.service.servlet.projeto.Database.DAO.UsuarioDAOImpl;
+import com.service.servlet.projeto.Database.Model.Livros;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

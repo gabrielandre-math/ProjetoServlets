@@ -1,4 +1,4 @@
-package com.service.servlet.projeto.Model;
+package com.service.servlet.projeto.Database.Model;
 
 public class Categorias {
     private Long id;

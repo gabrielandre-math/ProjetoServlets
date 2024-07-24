@@ -1,5 +1,5 @@
-<%@ page import="com.service.servlet.projeto.DAO.UsuarioDAOImpl" %>
-<%@ page import="com.service.servlet.projeto.Model.Usuarios" %>
+<%@ page import="com.service.servlet.projeto.Database.DAO.UsuarioDAOImpl" %>
+<%@ page import="com.service.servlet.projeto.Database.Model.Usuarios" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%@ page isELIgnored="false" %>

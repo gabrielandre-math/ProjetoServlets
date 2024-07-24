@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.service.servlet.projeto.DAO.UsuarioDAOImpl" %>
-<%@ page import="com.service.servlet.projeto.Model.Usuarios" %>
+<%@ page import="com.service.servlet.projeto.Database.DAO.UsuarioDAOImpl" %>
+<%@ page import="com.service.servlet.projeto.Database.Model.Usuarios" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%@ page isELIgnored="false" %>
@@ -84,6 +84,7 @@
                     <%
                         if(usuario.getId() != 1){
                     %>
+                    <td><%=usuario.getSenha()%></td>
                     <a href="edit_users.jsp?id=<%=usuario.getId()%>" class="btn btn-sm btn-primary">Editar</a>
                     <a href="../delete-user?id=<%=usuario.getId()%>" class="btn btn-sm btn-danger">Excluir</a>
                     <%

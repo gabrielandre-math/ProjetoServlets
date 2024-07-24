@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.service.servlet.projeto.DAO.CategoriaDAOImpl" %>
-<%@ page import="com.service.servlet.projeto.Model.Categorias" %>
+<%@ page import="com.service.servlet.projeto.Database.DAO.CategoriaDAOImpl" %>
+<%@ page import="com.service.servlet.projeto.Database.Model.Categorias" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>

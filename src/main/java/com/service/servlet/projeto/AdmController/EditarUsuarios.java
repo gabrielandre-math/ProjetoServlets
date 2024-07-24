@@ -1,7 +1,7 @@
 package com.service.servlet.projeto.AdmController;
 
-import com.service.servlet.projeto.DAO.UsuarioDAOImpl;
-import com.service.servlet.projeto.Model.Usuarios;
+import com.service.servlet.projeto.Database.DAO.UsuarioDAOImpl;
+import com.service.servlet.projeto.Database.Model.Usuarios;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

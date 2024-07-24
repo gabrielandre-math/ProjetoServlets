@@ -1,7 +1,7 @@
-<%@ page import="com.service.servlet.projeto.DB.DBConnection" %>
+<%@ page import="com.service.servlet.projeto.Database.Connection.DBConnection" %>
 <%@ page import="java.sql.Connection" %>
-<%@ page import="com.service.servlet.projeto.DAO.LivroDAOImpl" %>
-<%@ page import="com.service.servlet.projeto.Model.Livros" %>
+<%@ page import="com.service.servlet.projeto.Database.DAO.LivroDAOImpl" %>
+<%@ page import="com.service.servlet.projeto.Database.Model.Livros" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
